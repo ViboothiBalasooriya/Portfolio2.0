@@ -1,0 +1,208 @@
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Flip } from 'gsap/Flip';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger, Flip);
+
+const projects = [
+  { id: 1, img: "https://assets.codepen.io/16327/portrait-pattern-1.jpg" },
+  { id: 2, img: "https://assets.codepen.io/16327/portrait-image-12.jpg" },
+  { id: 3, type: "text", content: "VIBOOTHI BALASOORIYA" },
+  { id: 4, img: "https://assets.codepen.io/16327/portrait-pattern-2.jpg" },
+  { id: 5, img: "https://assets.codepen.io/16327/portrait-image-4.jpg" },
+  { id: 6, img: "https://assets.codepen.io/16327/portrait-image-3.jpg" },
+  { id: 7, img: "https://assets.codepen.io/16327/portrait-pattern-3.jpg" },
+  { id: 8, img: "https://assets.codepen.io/16327/portrait-image-1.jpg" },
+];
+
+const ProjectsBentoGallery = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const galleryRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      let galleryElement = galleryRef.current;
+      let galleryItems = galleryElement.querySelectorAll(".gallery__item");
+
+      galleryElement.classList.remove("gallery--final");
+
+      // Temporarily add the final class to capture the final state
+      galleryElement.classList.add("gallery--final");
+      const flipState = Flip.getState(galleryItems);
+      galleryElement.classList.remove("gallery--final");
+
+      const flip = Flip.to(flipState, {
+        simple: true,
+        ease: "expoScale(1, 5)",
+      });
+
+      let galleryWrap = containerRef.current.querySelector('.gallery-wrap');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: galleryElement,
+          start: "center center",
+          end: "+=300%",
+          scrub: true,
+          refreshPriority: -1
+        }
+      });
+
+      // Phase 0: Pause - let the full gallery sit still for a moment as the user scrolls
+      tl.to({}, { duration: 1 });
+
+      // Phase 1: Flip animation (bento grid expands)
+      tl.add(flip);
+
+      // Phase 2: Zoom gallery and transition background to white
+      if (galleryWrap) {
+        tl.set(galleryWrap, { overflow: 'visible' });
+      }
+      
+      tl.to(galleryElement, {
+        scale: 1.8,
+        duration: 1.5,
+        ease: "power2.in",
+        transformOrigin: "50% 50%"
+      });
+
+      let textElement = galleryElement.querySelector(".gallery-text-content");
+      if (textElement) {
+        tl.to(textElement, {
+          scale: 1 / 1.8,
+          duration: 1.5,
+          ease: "power2.in",
+          transformOrigin: "50% 50%"
+        }, "<");
+      }
+      
+      return () => gsap.set(galleryItems, { clearProps: "all" });
+    }, containerRef);
+    
+    return () => ctx.revert();
+  }, []);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [selectedProject]);
+
+  return (
+    <div ref={containerRef} className="projects-gallery-container" style={{ position: 'relative', zIndex: 20, backgroundColor: 'var(--bg-dark)' }}>
+      <div className="gallery-wrap">
+        <div className="gallery gallery--bento gallery--switch" ref={galleryRef}>
+          {projects.map((proj) => (
+            <div 
+              className="gallery__item" 
+              key={proj.id} 
+              onClick={() => !proj.type && setSelectedProject(proj)}
+              style={{ 
+                cursor: proj.type === 'text' ? 'default' : 'pointer', 
+                overflow: 'hidden'
+              }}
+            >
+              {proj.type === 'text' ? (
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <h2 className="gallery-text-content" style={{ 
+                    fontFamily: 'var(--font-inter)', 
+                    fontWeight: 400, 
+                    color: '#ffffff', 
+                    fontSize: 'clamp(16px, 2.5vw, 32px)', 
+                    textTransform: 'uppercase', 
+                    textAlign: 'center', 
+                    lineHeight: 1,
+                    whiteSpace: 'nowrap',
+                    padding: '1rem',
+                    margin: 0
+                  }}>
+                    {proj.content}
+                  </h2>
+                </div>
+              ) : (
+                <motion.img 
+                  layoutId={`project-img-${proj.id}`} 
+                  src={proj.img} 
+                  alt="" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} 
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              zIndex: 100,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '2rem',
+              cursor: 'zoom-out'
+            }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <button 
+              style={{ 
+                position: 'absolute', 
+                top: '2rem', 
+                right: '2rem', 
+                background: 'rgba(255, 255, 255, 0.1)', 
+                border: 'none', 
+                color: 'white', 
+                cursor: 'pointer',
+                borderRadius: '50%',
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+              onClick={() => setSelectedProject(null)}
+            >
+              <X size={24} />
+            </button>
+            <motion.img
+              layoutId={`project-img-${selectedProject.id}`}
+              src={selectedProject.img}
+              alt=""
+              style={{
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                objectFit: 'contain',
+                borderRadius: '12px',
+                cursor: 'default',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default ProjectsBentoGallery;
