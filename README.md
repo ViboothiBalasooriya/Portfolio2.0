@@ -1,16 +1,33 @@
-# React + Vite
+# Viboothi Balasooriya — Portfolio 3.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A cinematic, brutalist-inspired personal portfolio designed for impact. Built with modern React and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Overview
+This portfolio was engineered to break away from traditional "clean" grids and embrace a bold, high-contrast, editorial aesthetic. It uses full-bleed imagery, striking typography, and smooth micro-interactions to create an immersive experience that tells a story.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- **Frontend Framework:** React + Vite
+- **Styling:** Tailwind CSS (Vanilla utilities with custom CSS for structural stability)
+- **Icons:** Phosphor Icons & Custom SVGs
+- **Typography:** Inter & Monospace pairings
 
-## React Compiler
+## Features
+- **Immersive Video Heroes:** Seamless looping video backgrounds with loading sequences.
+- **Bento Grid Gallery:** A sophisticated, responsive image layout system.
+- **Cinematic Case Studies:** Full-bleed edge-to-edge portrait layouts with grain texturing.
+- **Brutalist Aesthetics:** High contrast, sharp edges, and intentional noise/grain textures.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running Locally
+To view the project locally on your machine:
 
-## Expanding the Oxlint configuration
+```bash
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+# Start the development server
+npm run dev
+```
+
+## Design Philosophy
+- **"The Story" Theme:** Moving beyond fragmented visuals into deeper, narrative-driven design.
+- **Texture:** Utilizing CSS-based film grain and optimized image rendering to mask digital upscaling and provide tactile depth.
