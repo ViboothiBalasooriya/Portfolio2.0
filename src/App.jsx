@@ -32,9 +32,10 @@ function App() {
           let isHero = panel.querySelector('#hero') !== null;
           let isProjects = panel.classList.contains('projects-section');
           let isBioText = panel.classList.contains('bio-text-section');
+          let isFAQ = panel.classList.contains('faq-section');
           
-          // Only apply global pinning to Hero, Projects, and BioText. Let the rest scroll natively.
-          if (!isHero && !isProjects && !isBioText) return;
+          // Only apply global pinning to Hero, Projects, BioText, and FAQ. Let the rest scroll natively.
+          if (!isHero && !isProjects && !isBioText && !isFAQ) return;
           
           let windowHeight = window.innerHeight;
           let endScroll = `+=${windowHeight}`;
@@ -46,7 +47,7 @@ function App() {
               trigger: panel,
               start: "top top",
               end: endScroll,
-              pinSpacing: isBioText ? false : true,
+              pinSpacing: (isBioText || isFAQ) ? false : true,
               pin: true,
               scrub: true,
               invalidateOnRefresh: true
@@ -107,7 +108,7 @@ function App() {
             }
           } else if (isProjects) {
             // Let it stay fully visible and pinned. The internal bento timeline handles the zoom.
-          } else if (isBioText) {
+          } else if (isBioText || isFAQ) {
             // Just pin it without any scale/fade animations so the next section natively scrolls over it.
           }
         });
@@ -131,7 +132,7 @@ function App() {
           <section className="section"><div className="section-inner"><CaseStudies /></div></section>
           <section className="section bio-text-section" style={{ position: 'relative', zIndex: 1 }}><div className="section-inner"><BioTextSection /></div></section>
           <section className="section faq-section" style={{ position: 'relative', zIndex: 2 }}><div className="section-inner"><FAQSection /></div></section>
-          <section className="section"><div className="section-inner"><Footer /></div></section>
+          <section className="section footer-section" style={{ position: 'relative', zIndex: 3 }}><div className="section-inner"><Footer /></div></section>
         </main>
       </div>
     </ReactLenis>

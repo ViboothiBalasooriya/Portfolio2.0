@@ -24,7 +24,7 @@ const BioTextSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-[#ff1919] overflow-hidden" style={{ padding: '8vw 0' }}>
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-[#000000] overflow-hidden" style={{ padding: '8vw 0' }}>
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -48,7 +48,7 @@ const BioTextSection = () => {
             style={{
               display: 'inline-block',
               backgroundColor: '#ffffff',
-              color: '#ff1919',
+              color: '#000000',
               fontFamily: 'var(--font-inter)',
               fontWeight: 900,
               fontSize: 'clamp(24px, 4vw, 75px)',
