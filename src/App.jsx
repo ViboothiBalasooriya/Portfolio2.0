@@ -8,6 +8,7 @@ import FolioHero from './components/FolioHero';
 import LatestProjects from './components/LatestProjects';
 import CaseStudies from './components/CaseStudies';
 import FAQSection from './components/FAQSection';
+import BioTextSection from './components/BioTextSection';
 import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -30,17 +31,22 @@ function App() {
           
           let isHero = panel.querySelector('#hero') !== null;
           let isProjects = panel.classList.contains('projects-section');
+          let isBioText = panel.classList.contains('bio-text-section');
           
-          // Only apply global pinning to Hero and Projects. Let the rest scroll natively.
-          if (!isHero && !isProjects) return;
+          // Only apply global pinning to Hero, Projects, and BioText. Let the rest scroll natively.
+          if (!isHero && !isProjects && !isBioText) return;
           
           let windowHeight = window.innerHeight;
+          let endScroll = `+=${windowHeight}`;
+          if (isHero) endScroll = `+=${windowHeight * 2.5}`;
+          else if (isProjects) endScroll = `+=${windowHeight * 3}`;
+          
           let tl = gsap.timeline({
             scrollTrigger: {
               trigger: panel,
               start: "top top",
-              end: isHero ? `+=${windowHeight * 2.5}` : `+=${windowHeight * 3}`,
-              pinSpacing: true,
+              end: endScroll,
+              pinSpacing: isBioText ? false : true,
               pin: true,
               scrub: true,
               invalidateOnRefresh: true
@@ -66,38 +72,43 @@ function App() {
               }, 0.1);
             }
 
-            // Fade the background video to solid black as the 'O' zooms
+            // Fade the background video to solid black ONLY when the 'O' hole covers the screen
             let fadeToBlack = panel.querySelector('.fade-to-black');
             if (fadeToBlack) {
               tl.to(fadeToBlack, {
                 opacity: 1,
-                duration: 0.5,
-                ease: "power2.in"
-              }, 0.2); // Fade out early
+                duration: 0.2, // quick fade right at the end of the zoom
+                ease: "none"
+              }, 0.85);
             }
 
-            // Reveal the bio text from INSIDE the 'O'
+            // Reveal the Vibe Coder section from INSIDE the 'O'
             let bioContainer = panel.querySelector('.bio-container');
             if (bioContainer) {
-              let bioWords = bioContainer.querySelectorAll('.bio-word');
+              let vibeLeft = bioContainer.querySelector('.vibe-reveal-left');
+              let vibeRight = bioContainer.querySelector('.vibe-reveal-right');
               
-              tl.fromTo(bioContainer, { opacity: 0, scale: 0.8 }, {
+              tl.fromTo(bioContainer, { opacity: 0, scale: 0.9 }, {
                 opacity: 1,
                 scale: 1,
                 duration: 0.8,
                 ease: "power2.out"
               }, 0.3); // Fade in container as hole gets big enough
               
-              tl.fromTo(bioWords, { opacity: 0, y: 30 }, {
-                opacity: 1,
-                y: 0,
-                duration: 0.4,
-                stagger: 0.03,
-                ease: "power2.out"
-              }, 0.4);
+              if (vibeLeft && vibeRight) {
+                tl.fromTo([vibeLeft, vibeRight], { opacity: 0, y: 40 }, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.6,
+                  stagger: 0.2,
+                  ease: "power2.out"
+                }, 0.5);
+              }
             }
           } else if (isProjects) {
             // Let it stay fully visible and pinned. The internal bento timeline handles the zoom.
+          } else if (isBioText) {
+            // Just pin it without any scale/fade animations so the next section natively scrolls over it.
           }
         });
 
@@ -118,7 +129,8 @@ function App() {
           <section className="section"><div className="section-inner"><FolioHero /></div></section>
           <section className="section projects-section"><div className="section-inner"><LatestProjects /></div></section>
           <section className="section"><div className="section-inner"><CaseStudies /></div></section>
-          <section className="section"><div className="section-inner"><FAQSection /></div></section>
+          <section className="section bio-text-section" style={{ position: 'relative', zIndex: 1 }}><div className="section-inner"><BioTextSection /></div></section>
+          <section className="section faq-section" style={{ position: 'relative', zIndex: 2 }}><div className="section-inner"><FAQSection /></div></section>
           <section className="section"><div className="section-inner"><Footer /></div></section>
         </main>
       </div>

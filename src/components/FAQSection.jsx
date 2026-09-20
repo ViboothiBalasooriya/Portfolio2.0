@@ -1,129 +1,225 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const FAQSection = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+/* ─── hand-drawn accent ───────────────────────────────────── */
+const RedCurveArrow = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 90 70" fill="none" stroke="#ff1919" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 60 C 28 28, 62 14, 82 16 M 70 8 L 82 16 L 74 28" />
+  </svg>
+);
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+/* ─── tech stack tag ──────────────────────────────────────── */
+const TechTag = ({ label }) => (
+  <span
+    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+    className="inline-block text-[10px] font-medium tracking-[0.15em] uppercase text-[#888] border border-[#1e1e1e] bg-[#0e0e0e] px-3 py-1.5"
+  >
+    {label}
+  </span>
+);
 
-  return (
-    <section ref={containerRef} id="faqs" className="relative w-full bg-[#050505] overflow-hidden selection:bg-[#ff0000] selection:text-white">
-      
-      {/* Film Grain Overlay */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.08] mix-blend-screen z-0" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}></div>
+/* ─── FAQ data ────────────────────────────────────────────── */
+const FAQ_ITEMS = [
+  {
+    id: '01',
+    question: 'HOW DO YOU WORK?',
+    content: (
+      <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+        Vibe coding at the speed of thought, leveraging AI models for high-agency, hyper-rapid prototypes.
+        We skip the bloat and go straight to pixel-perfect execution — from first idea to shipped product,
+        faster than most teams write a PRD.
+      </p>
+    )
+  },
+  {
+    id: '02',
+    question: "WHAT'S THE TECH?",
+    content: (
+      <div className="flex flex-col gap-4">
+        <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+          A bleeding-edge stack chosen for raw speed and extreme quality:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {['NEXT.JS', 'REACT', 'VITE', 'GSAP', 'FRAMER MOTION', 'TAILWIND CSS', 'GEMINI API', 'VERCEL AI SDK', 'TYPESCRIPT', 'THREE.JS'].map(t => (
+            <TechTag key={t} label={t} />
+          ))}
+        </div>
+      </div>
+    )
+  },
+  {
+    id: '03',
+    question: 'DO YOU TAKE ON IMPOSSIBLE DEADLINES?',
+    content: (
+      <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+        Only if the vibe is right. The more chaotic the scope, the harder we lock in.
+        Building the unbuildable is the entire point.
+      </p>
+    )
+  }
+];
 
-      <div className="relative z-10 w-full pt-32 pb-32 md:pb-[20vh]">
-        
-        {/* Top Header */}
-        <div className="w-full px-[8vw] lg:px-[10vw] flex flex-col md:flex-row justify-between items-start mb-32">
-          <h2 className="text-[#ffffff] font-inter font-black text-2xl md:text-4xl uppercase leading-[1] max-w-2xl tracking-tighter">
-            TIRED OF OUTDATED<br/>DIGITAL EXPERIENCES?
-          </h2>
-          <span className="text-white/60 font-mono text-xs md:text-sm tracking-widest mt-8 md:mt-0 uppercase">
-            [ ABOUT ME ]
+/* ─── accordion item ──────────────────────────────────────── */
+const FaqItem = ({ item, isOpen, onToggle }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-40px' }}
+    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    className="relative group"
+  >
+    {/* hover red glow */}
+    <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-none"
+      style={{ boxShadow: '0 0 40px rgba(255,25,25,0.08)' }} />
+
+    <div
+      onClick={onToggle}
+      className="relative cursor-pointer border border-[#ff1919] bg-[#0a0a0a] transition-colors duration-300 group-hover:bg-[#0d0909]"
+      style={{
+        // chamfered top-left + bottom-right corners
+        clipPath: 'polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)'
+      }}
+    >
+      {/* noise layer on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500 mix-blend-overlay"
+        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+      />
+
+      {/* question row */}
+      <button
+        className="relative z-10 w-full flex items-center justify-between gap-6 px-6 py-5 md:px-8 md:py-6 text-left"
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-center gap-5 min-w-0">
+          <span
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            className="shrink-0 text-xs font-bold tracking-[0.25em] text-[#ff1919]"
+          >
+            {item.id} /
+          </span>
+          <span
+            style={{ fontFamily: "'Syne', sans-serif" }}
+            className={`font-bold uppercase tracking-tight transition-colors duration-200 text-base md:text-xl ${isOpen ? 'text-white' : 'text-white/80 group-hover:text-white'}`}
+          >
+            {item.question}
           </span>
         </div>
 
-        {/* Stats & Image Grid */}
-        <div className="w-full px-[8vw] lg:px-[10vw] grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 items-center">
-          
-          {/* Left Stats */}
-          <div className="flex flex-col space-y-24">
-            <motion.div style={{ y: y1 }}>
-              <h3 className="text-white font-inter font-black text-4xl lg:text-6xl tracking-tighter">3+ years</h3>
-              <p className="text-[#ff0000] font-inter text-xs font-bold mt-3 uppercase max-w-[180px] leading-relaxed">
-                of experience <span className="text-white/70 font-normal">in the full-stack development market</span>
-              </p>
-            </motion.div>
-            <motion.div style={{ y: y1 }}>
-              <h3 className="text-white font-inter font-black text-4xl lg:text-6xl tracking-tighter">100%</h3>
-              <p className="text-[#ff0000] font-inter text-xs font-bold mt-3 uppercase max-w-[180px] leading-relaxed">
-                commitment <span className="text-white/70 font-normal">to high-performance, pixel-perfect UIs</span>
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Center Image */}
-          <div className="flex justify-center relative my-12 md:my-0 md:mt-32">
-            <motion.div 
-              initial={{ rotate: -5, scale: 0.9 }}
-              whileInView={{ rotate: -2, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative z-10 w-[240px] md:w-[300px]"
-            >
-              <div className="absolute inset-0 bg-[#1a1a1a] transform rotate-3 scale-105 -z-10 shadow-2xl"></div>
-              <img 
-                src="/assets/about_portrait.png" 
-                alt="Portrait" 
-                className="w-full h-auto object-cover grayscale brightness-75 contrast-125 border-4 border-[#1a1a1a]" 
-              />
-              {/* Film strip edge effect (visual flair) */}
-              <div className="absolute -left-3 top-0 bottom-0 w-3 flex flex-col justify-between py-2">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className="w-1.5 h-2 bg-black/80 mx-auto rounded-sm"></div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Stats */}
-          <div className="flex flex-col space-y-24 md:items-end md:text-right">
-            <motion.div style={{ y: y2 }}>
-              <h3 className="text-white font-inter font-black text-4xl lg:text-6xl tracking-tighter">50+</h3>
-              <p className="text-[#ff0000] font-inter text-xs font-bold mt-3 uppercase max-w-[180px] ml-auto leading-relaxed">
-                successful <span className="text-white/70 font-normal">projects shipped globally</span>
-              </p>
-            </motion.div>
-            <motion.div style={{ y: y2 }}>
-              <h3 className="text-white font-inter font-black text-4xl lg:text-6xl tracking-tighter">200%</h3>
-              <p className="text-[#ff0000] font-inter text-xs font-bold mt-3 uppercase max-w-[180px] ml-auto leading-relaxed">
-                faster <span className="text-white/70 font-normal">delivery through advanced agile frameworks</span>
-              </p>
-            </motion.div>
-          </div>
-
-        </div>
-
-        {/* Big Red Typography Section */}
-        <div className="w-full flex justify-center items-center mt-64 lg:mt-80 relative px-4 pb-64 md:pb-96">
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-[#ff0000] font-inter font-black text-[10vw] md:text-[6.5vw] leading-[0.9] tracking-tighter text-center max-w-[95vw] md:max-w-[85vw] relative z-10 break-words"
+        {/* toggle icon */}
+        <div className="shrink-0 w-8 h-8 border border-[#ff1919]/40 flex items-center justify-center group-hover:border-[#ff1919] transition-colors duration-200">
+          <motion.svg
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="w-4 h-4 text-[#ff1919]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2.5"
           >
-            I AM A DEVELOPER THAT USES ADVANCED TECHNOLOGIES TO BUILD DIGITAL EXPERIENCES EVEN BEFORE YOU REALIZE YOU NEED THEM
-            
-            {/* Hand-drawn SVG arrows (Decorative) - Repositioned to avoid clipping */}
-            <svg className="absolute -top-16 left-[2%] md:left-[10%] w-12 md:w-20 text-white transform -rotate-12 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-              <path d="M10,90 Q40,40 90,10 M70,10 L90,10 L90,30" />
-            </svg>
-            <svg className="absolute bottom-8 -right-2 md:-right-8 w-12 md:w-20 text-white transform rotate-45 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-              <path d="M10,90 Q40,40 90,10 M70,10 L90,10 L90,30" />
-            </svg>
-            <svg className="absolute -bottom-12 left-[30%] w-20 md:w-32 text-white pointer-events-none" viewBox="0 0 200 40" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round">
-              <path d="M10,30 Q100,5 190,30" />
-            </svg>
-          </motion.h2>
+            <path strokeLinecap="square" strokeLinejoin="miter" d="M19 9l-7 7-7-7" />
+          </motion.svg>
         </div>
+      </button>
 
+      {/* expandable content */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.38, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
+          >
+            <div className="relative z-10 px-6 pb-6 md:px-8 md:pb-8 pt-0 pl-[4.25rem] md:pl-[4.75rem]">
+              {item.content}
+              <div className="w-8 h-[2px] bg-[#ff1919] mt-5" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  </motion.div>
+);
+
+/* ─── main component ──────────────────────────────────────── */
+const FAQSection = () => {
+  const [openId, setOpenId] = useState('01');
+
+  const toggle = (id) => setOpenId(prev => prev === id ? null : id);
+
+  return (
+    <section id="faq-specs" className="relative w-full min-h-screen flex items-center justify-center bg-[#000000] overflow-hidden" style={{ padding: '8vw 0' }}>
+
+      {/* Background Lighting Effects */}
+      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#ff1919] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#ff1919] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
+
+      {/* subtle grain */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.04] mix-blend-screen"
+        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+      />
+
+      {/* ── content wrapper ────────────────────────────────── */}
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
+        
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-24 w-full">
+
+          {/* LEFT COLUMN — heading ────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col lg:w-1/2 z-20"
+          >
+            <div className="mb-6 relative">
+              <h2
+                style={{ fontFamily: "'Syne', sans-serif" }}
+                className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
+              >
+                HAVE <br className="hidden lg:block" />
+                QUESTIONS?
+              </h2>
+              <div className="relative inline-block mt-2">
+                <h2
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ff1919]"
+                >
+                  WE HAVE <br className="hidden lg:block" />
+                  ANSWERS.
+                </h2>
+                {/* hand-drawn accent arrow */}
+                <RedCurveArrow className="absolute -top-6 -right-12 lg:-top-12 lg:-right-16 w-16 h-12 lg:w-20 lg:h-14 opacity-70 pointer-events-none transform rotate-12" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT COLUMN — accordion list ──────────────────── */}
+          <motion.div 
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-3 md:gap-4 w-full lg:w-1/2 z-10"
+          >
+            {FAQ_ITEMS.map(item => (
+              <FaqItem
+                key={item.id}
+                item={item}
+                isOpen={openId === item.id}
+                onToggle={() => toggle(item.id)}
+              />
+            ))}
+          </motion.div>
+
+        </div>
       </div>
-      
-      {/* CSS for hiding scrollbar in cards */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}} />
     </section>
   );
 };

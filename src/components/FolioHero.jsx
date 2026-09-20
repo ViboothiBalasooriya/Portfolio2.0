@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import heroVideo from '../assets/Man_blinking_slowly_1080p_20260914170541_1080p_20260914172941.mp4';
+import AboutMe from './AboutMe';
 
 const navLinks = [
   { label: 'portfolio', href: '#projects' },
@@ -248,7 +249,7 @@ const FolioHero = () => {
         }}
       />
 
-      {/* Bio Text Container (zIndex: 5) - Sits behind the 'O' (zIndex: 10) but in front of video/black overlay */}
+      {/* Vibe Coder Container (zIndex: 5) - Sits behind the 'O' (zIndex: 10) but in front of video/black overlay */}
       <div 
         className="bio-container"
         style={{
@@ -262,42 +263,8 @@ const FolioHero = () => {
           opacity: 0, // Animated by GSAP
         }}
       >
-        <div 
-          style={{
-            maxWidth: '1200px',
-            width: '100%',
-            padding: '0 var(--side-padding)',
-            textAlign: 'center',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            lineHeight: '1.1',
-          }}
-        >
-          {[
-            "PUSHING", "PIXELS,", "OPTIMIZING", "LOGIC,", "AND", "TURNING", "VISION", 
-            "INTO", "REALITY.", "DEFINING", "A", "CREATIVE", "AND", "TECHNICAL", 
-            "LEGACY", "IN", "DESIGN", "AND", "CODE—ON", "AND", "OFF", "THE", "SCREEN."
-          ].map((word, i) => (
-            <span
-              key={i}
-              className="bio-word"
-              style={{
-                display: 'inline-block',
-                backgroundColor: '#ffffff',
-                color: '#0a0a0a',
-                fontFamily: 'var(--font-inter)',
-                fontWeight: 900,
-                fontSize: 'clamp(24px, 4vw, 75px)',
-                letterSpacing: '-0.03em',
-                padding: '0 0.2em',
-                margin: '0.05em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {word}
-            </span>
-          ))}
+        <div style={{ width: '100%', pointerEvents: 'auto' }}>
+          <AboutMe />
         </div>
       </div>
       {/* Navbar */}
