@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { client, urlFor } from '../client';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Flip } from 'gsap/Flip';
@@ -7,7 +8,7 @@ import { X } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, Flip);
 
-const projects = [
+const DEFAULT_PROJECTS = [
   { id: 1, img: "https://assets.codepen.io/16327/portrait-pattern-1.jpg" },
   { id: 2, img: "https://assets.codepen.io/16327/portrait-image-12.jpg" },
   { id: 3, type: "text", content: "VIBOOTHI BALASOORIYA" },
@@ -20,8 +21,23 @@ const projects = [
 
 const ProjectsBentoGallery = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
   const galleryRef = useRef(null);
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    client.fetch('*[_type == "project"] | order(order asc)').then((data) => {
+      if (data && data.length > 0) {
+        const formatted = data.map((p) => ({
+          id: p._id,
+          type: p.isTextOnly ? 'text' : undefined,
+          content: p.title,
+          img: p.image ? urlFor(p.image).url() : undefined
+        }));
+        setProjects(formatted);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     let ctx = gsap.context(() => {

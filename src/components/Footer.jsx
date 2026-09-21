@@ -4,7 +4,7 @@ import { FaMusic, FaFacebook, FaXTwitter, FaYoutube, FaInstagram, FaGithub, FaLi
 
 /* ─── hand-drawn SVG accents ─────────────────────────────── */
 const RedScribbleUnderline = () => (
-  <svg viewBox="0 0 600 12" preserveAspectRatio="none" fill="none" stroke="#ff1919" strokeWidth="1.5" strokeLinecap="round" className="absolute left-0 -bottom-2 w-full h-3 opacity-90">
+  <svg viewBox="0 0 600 12" preserveAspectRatio="none" fill="none" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" className="absolute left-0 -bottom-2 w-full h-3 opacity-90">
     <path d="M 2 8 C 80 2, 200 10, 320 4 C 440 -2, 530 8, 598 4" />
     <path d="M 50 10 C 200 6, 400 12, 550 8" strokeWidth="1" opacity="0.5"/>
   </svg>
@@ -51,8 +51,8 @@ const Footer = () => {
     <section className="relative w-full overflow-x-hidden flex flex-col font-sans bg-[#ffffff]" style={{ minHeight: '100vh', padding: '8vw 0 0 0' }}>
       
       {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#ff1919] rounded-full blur-[150px] opacity-[0.02] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#ff1919] rounded-full blur-[120px] opacity-[0.03] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#000000] rounded-full blur-[150px] opacity-[0.02] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#000000] rounded-full blur-[120px] opacity-[0.03] pointer-events-none" />
       
       {/* subtle grain */}
       <div
@@ -77,13 +77,13 @@ const Footer = () => {
             {/* ── heading ──────────────────────────────────────── */}
             <div>
               <div className="flex items-center gap-3 mb-6 opacity-60">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#ff1919" strokeWidth="2" className="w-5 h-5">
+                <svg viewBox="0 0 20 20" fill="none" stroke="#000000" strokeWidth="2" className="w-5 h-5">
                   <path d="M 12 4 L 4 10 L 12 16 M 16 4 L 8 10 L 16 16" />
                 </svg>
                 <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[11px] font-medium tracking-[0.2em] text-[#555] uppercase">
                   INITIATE COMMS
                 </p>
-                <svg viewBox="0 0 20 20" fill="none" stroke="#ff1919" strokeWidth="2" className="w-5 h-5">
+                <svg viewBox="0 0 20 20" fill="none" stroke="#000000" strokeWidth="2" className="w-5 h-5">
                   <path d="M 8 4 L 16 10 L 8 16 M 4 4 L 12 10 L 4 16" />
                 </svg>
               </div>
@@ -93,35 +93,35 @@ const Footer = () => {
                 className="text-6xl md:text-7xl lg:text-[6rem] font-extrabold uppercase leading-[0.9] tracking-tight text-black drop-shadow-sm"
               >
                 LET'S <br />
-                <span className="text-[#ff1919]">TALK.</span>
+                <span className="text-[#000000]">TALK.</span>
               </h2>
             </div>
 
             {/* Direct Contact & Socials */}
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-2">
-                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#ff1919] uppercase">
+                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#000000] uppercase">
                   [ DIRECT CONTACT ]
                 </span>
                 <a
                   href="mailto:viboothi@gmail.com"
                   style={{ fontFamily: "'Syne', sans-serif" }}
-                  className="text-4xl md:text-5xl lg:text-[3rem] font-bold text-black hover:text-[#ff1919] transition-colors"
+                  className="text-4xl md:text-5xl lg:text-[3rem] font-bold text-black hover:text-[#000000] transition-colors"
                 >
                   VIBOOTHI@GMAIL.COM
                 </a>
               </div>
               
               <div className="flex flex-col gap-4">
-                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#ff1919] uppercase">
+                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#000000] uppercase">
                   [ TRANSMISSION NETWORKS ]
                 </span>
                 <div className="flex items-center gap-6 mt-1">
-                    <a href="#" className="text-[#222] hover:text-[#ff1919] transition-colors"><FaGithub size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#ff1919] transition-colors"><FaLinkedin size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#ff1919] transition-colors"><FaXTwitter size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#ff1919] transition-colors"><FaDribbble size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#ff1919] transition-colors"><FaInstagram size={34} /></a>
+                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaGithub size={34} /></a>
+                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaLinkedin size={34} /></a>
+                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaXTwitter size={34} /></a>
+                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaDribbble size={34} /></a>
+                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaInstagram size={34} /></a>
                 </div>
               </div>
             </div>
@@ -141,15 +141,15 @@ const Footer = () => {
               <div className="relative border-2 border-black bg-white p-10 md:p-14 shadow-2xl">
                 
                 {/* HUD Corner Brackets */}
-                <div className="absolute -top-[2px] -left-[2px] w-6 h-6 border-t-[3px] border-l-[3px] border-[#ff1919] opacity-100 pointer-events-none" />
-                <div className="absolute -top-[2px] -right-[2px] w-6 h-6 border-t-[3px] border-r-[3px] border-[#ff1919] opacity-100 pointer-events-none" />
-                <div className="absolute -bottom-[2px] -left-[2px] w-6 h-6 border-b-[3px] border-l-[3px] border-[#ff1919] opacity-100 pointer-events-none" />
-                <div className="absolute -bottom-[2px] -right-[2px] w-6 h-6 border-b-[3px] border-r-[3px] border-[#ff1919] opacity-100 pointer-events-none" />
+                <div className="absolute -top-[2px] -left-[2px] w-6 h-6 border-t-[3px] border-l-[3px] border-[#000000] opacity-100 pointer-events-none" />
+                <div className="absolute -top-[2px] -right-[2px] w-6 h-6 border-t-[3px] border-r-[3px] border-[#000000] opacity-100 pointer-events-none" />
+                <div className="absolute -bottom-[2px] -left-[2px] w-6 h-6 border-b-[3px] border-l-[3px] border-[#000000] opacity-100 pointer-events-none" />
+                <div className="absolute -bottom-[2px] -right-[2px] w-6 h-6 border-b-[3px] border-r-[3px] border-[#000000] opacity-100 pointer-events-none" />
 
                 <div className="flex justify-between items-center pb-6 border-b border-[#ddd] mb-8">
                   <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.3em] text-[#333] font-bold uppercase">MESSAGE PING</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#ff1919] uppercase font-bold flex items-center gap-2 drop-shadow-[0_0_4px_rgba(255,25,25,0.4)]">
-                    <span className="w-2 h-2 rounded-full bg-[#ff1919] animate-pulse inline-block" />
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#000000] uppercase font-bold flex items-center gap-2 drop-shadow-[0_0_4px_rgba(0,0,0,0.4)]">
+                    <span className="w-2 h-2 rounded-full bg-[#000000] animate-pulse inline-block" />
                     AWAITING INPUT
                   </span>
                 </div>
@@ -166,7 +166,7 @@ const Footer = () => {
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       style={inputStyle}
-                      onFocus={(e) => e.target.style.borderColor = '#ff1919'}
+                      onFocus={(e) => e.target.style.borderColor = '#000000'}
                       onBlur={(e) => e.target.style.borderColor = '#ddd'}
                       className="placeholder:text-[#999]"
                     />
@@ -183,7 +183,7 @@ const Footer = () => {
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       style={inputStyle}
-                      onFocus={(e) => e.target.style.borderColor = '#ff1919'}
+                      onFocus={(e) => e.target.style.borderColor = '#000000'}
                       onBlur={(e) => e.target.style.borderColor = '#ddd'}
                       className="placeholder:text-[#999]"
                     />
@@ -200,7 +200,7 @@ const Footer = () => {
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       style={{ ...inputStyle, resize: 'none' }}
-                      onFocus={(e) => e.target.style.borderColor = '#ff1919'}
+                      onFocus={(e) => e.target.style.borderColor = '#000000'}
                       onBlur={(e) => e.target.style.borderColor = '#ddd'}
                       className="placeholder:text-[#999]"
                     />
@@ -212,9 +212,9 @@ const Footer = () => {
                     type="submit"
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
-                      backgroundColor: sent ? '#000' : '#ff1919',
-                      color: sent ? '#ff1919' : '#ffffff',
-                      border: sent ? '2px solid #000' : '2px solid #ff1919',
+                      backgroundColor: sent ? '#ffffff' : '#000000',
+                      color: sent ? '#000000' : '#ffffff',
+                      border: '2px solid #000000',
                     }}
                     className="w-full py-5 mt-8 text-base font-bold tracking-[0.2em] uppercase transition-colors"
                   >

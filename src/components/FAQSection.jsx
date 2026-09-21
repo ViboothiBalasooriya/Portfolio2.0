@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { client } from '../client';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /* ─── hand-drawn accent ───────────────────────────────────── */
 const RedCurveArrow = ({ className = '' }) => (
-  <svg className={className} viewBox="0 0 90 70" fill="none" stroke="#ff1919" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className={className} viewBox="0 0 90 70" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M6 60 C 28 28, 62 14, 82 16 M 70 8 L 82 16 L 74 28" />
   </svg>
 );
@@ -19,7 +20,7 @@ const TechTag = ({ label }) => (
 );
 
 /* ─── FAQ data ────────────────────────────────────────────── */
-const FAQ_ITEMS = [
+const DEFAULT_FAQ_ITEMS = [
   {
     id: '01',
     question: 'HOW DO YOU WORK?',
@@ -70,11 +71,11 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
   >
     {/* hover red glow */}
     <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-none"
-      style={{ boxShadow: '0 0 40px rgba(255,25,25,0.08)' }} />
+      style={{ boxShadow: '0 0 40px rgba(255,255,255,0.08)' }} />
 
     <div
       onClick={onToggle}
-      className="relative cursor-pointer border border-[#ff1919] bg-[#0a0a0a] transition-colors duration-300 group-hover:bg-[#0d0909]"
+      className="relative cursor-pointer border border-[#ffffff] bg-[#0a0a0a] transition-colors duration-300 group-hover:bg-[#0d0909]"
       style={{
         // chamfered top-left + bottom-right corners
         clipPath: 'polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)'
@@ -95,7 +96,7 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
         <div className="flex items-center gap-5 min-w-0">
           <span
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            className="shrink-0 text-xs font-bold tracking-[0.25em] text-[#ff1919]"
+            className="shrink-0 text-xs font-bold tracking-[0.25em] text-[#ffffff]"
           >
             {item.id} /
           </span>
@@ -108,11 +109,11 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
         </div>
 
         {/* toggle icon */}
-        <div className="shrink-0 w-8 h-8 border border-[#ff1919]/40 flex items-center justify-center group-hover:border-[#ff1919] transition-colors duration-200">
+        <div className="shrink-0 w-8 h-8 border border-[#ffffff]/40 flex items-center justify-center group-hover:border-[#ffffff] transition-colors duration-200">
           <motion.svg
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="w-4 h-4 text-[#ff1919]"
+            className="w-4 h-4 text-[#ffffff]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -136,7 +137,7 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
           >
             <div className="relative z-10 px-6 pb-6 md:px-8 md:pb-8 pt-0 pl-[4.25rem] md:pl-[4.75rem]">
               {item.content}
-              <div className="w-8 h-[2px] bg-[#ff1919] mt-5" />
+              <div className="w-8 h-[2px] bg-[#ffffff] mt-5" />
             </div>
           </motion.div>
         )}
@@ -148,6 +149,33 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
 /* ─── main component ──────────────────────────────────────── */
 const FAQSection = () => {
   const [openId, setOpenId] = useState('01');
+  const [faqItems, setFaqItems] = useState(DEFAULT_FAQ_ITEMS);
+
+  useEffect(() => {
+    client.fetch('*[_type == "faq"] | order(order asc)').then((data) => {
+      if (data && data.length > 0) {
+        const formatted = data.map((f, i) => ({
+          id: `0${i + 1}`,
+          question: f.question,
+          content: (
+            <div className="flex flex-col gap-4">
+              <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+                {f.answer}
+              </p>
+              {f.tags && f.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {f.tags.map((t) => (
+                    <TechTag key={t} label={t} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        }));
+        setFaqItems(formatted);
+      }
+    });
+  }, []);
 
   const toggle = (id) => setOpenId(prev => prev === id ? null : id);
 
@@ -155,8 +183,8 @@ const FAQSection = () => {
     <section id="faq-specs" className="relative w-full min-h-screen flex items-center justify-center bg-[#000000] overflow-hidden" style={{ padding: '8vw 0' }}>
 
       {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#ff1919] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#ff1919] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#ffffff] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#ffffff] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
 
       {/* subtle grain */}
       <div
@@ -189,7 +217,7 @@ const FAQSection = () => {
               <div className="relative inline-block mt-2">
                 <h2
                   style={{ fontFamily: "'Syne', sans-serif" }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ff1919]"
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ffffff]"
                 >
                   WE HAVE <br className="hidden lg:block" />
                   ANSWERS.
@@ -208,7 +236,7 @@ const FAQSection = () => {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-3 md:gap-4 w-full lg:w-1/2 z-10"
           >
-            {FAQ_ITEMS.map(item => (
+            {faqItems.map(item => (
               <FaqItem
                 key={item.id}
                 item={item}

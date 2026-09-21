@@ -1,13 +1,13 @@
 import React from 'react';
 /* ─── hand-drawn SVG accents ─────────────────────────────── */
 const UpArrow = ({ className = '' }) => (
-  <svg className={className} viewBox="0 0 20 20" fill="none" stroke="#ff1919" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className={className} viewBox="0 0 20 20" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M 5 15 L 10 10 L 15 15 M 5 10 L 10 5 L 15 10" />
   </svg>
 );
 
 const RedScribbleUnderline = () => (
-  <svg viewBox="0 0 600 12" preserveAspectRatio="none" fill="none" stroke="#ff1919" strokeWidth="1.5" strokeLinecap="round" className="absolute left-0 -bottom-2 w-full h-3 opacity-90">
+  <svg viewBox="0 0 600 12" preserveAspectRatio="none" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" className="absolute left-0 -bottom-2 w-full h-3 opacity-90">
     <path d="M 2 8 C 80 2, 200 10, 320 4 C 440 -2, 530 8, 598 4" />
     <path d="M 50 10 C 200 6, 400 12, 550 8" strokeWidth="1" opacity="0.5"/>
   </svg>
@@ -16,7 +16,7 @@ const RedScribbleUnderline = () => (
 /* ─── stat block ──────────────────────────────────────────── */
 const StatBlock = ({ label, value, sub }) => (
   <div className="flex flex-col gap-1">
-    <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] font-bold tracking-[0.2em] text-[#ff1919] uppercase">
+    <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] font-bold tracking-[0.2em] text-[#ffffff] uppercase">
       {label}
     </span>
     <span style={{ fontFamily: "'Syne', sans-serif" }} className="text-6xl md:text-7xl font-extrabold text-white leading-none tracking-tighter">
@@ -47,8 +47,8 @@ const AboutMe = () => {
       style={{ padding: '8vw 0' }}
     >
       {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#ff1919] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#ff1919] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#ffffff] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#ffffff] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
       
       {/* subtle grain */}
       <div
@@ -71,8 +71,8 @@ const AboutMe = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
               >
                 I AM A <br />
-                <span className="text-[#ff1919]">VIBE</span> <br />
-                <span className="text-[#ff1919]">CODER</span>
+                <span className="text-[#ffffff]">VIBE</span> <br />
+                <span className="text-[#ffffff]">CODER</span>
               </h2>
               <div className="relative inline-block mt-2">
                 <h2
@@ -94,7 +94,7 @@ const AboutMe = () => {
             {/* ── micro tags & coords ──────────────────────────── */}
             <div className="flex flex-col gap-4 mt-8 lg:mt-12">
               <div className="flex flex-wrap gap-2 items-center">
-                <div className="w-2 h-4 border-l-2 border-t-2 border-[#ff1919] opacity-70" />
+                <div className="w-2 h-4 border-l-2 border-t-2 border-[#ffffff] opacity-70" />
                 <Chip label="NEXT.JS" />
                 <Chip label="REACT" />
                 <Chip label="AI AGENTS" />
@@ -104,13 +104,13 @@ const AboutMe = () => {
               </div>
               
               <div className="flex items-center gap-3 mt-4 opacity-60">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#ff1919" strokeWidth="2" className="w-5 h-5">
+                <svg viewBox="0 0 20 20" fill="none" stroke="#ffffff" strokeWidth="2" className="w-5 h-5">
                   <path d="M 12 4 L 4 10 L 12 16 M 16 4 L 8 10 L 16 16" />
                 </svg>
                 <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[11px] font-medium tracking-[0.2em] text-[#666] uppercase">
                   MAY '16 — INIT SEQUENCE STARTED
                 </p>
-                <svg viewBox="0 0 20 20" fill="none" stroke="#ff1919" strokeWidth="2" className="w-5 h-5">
+                <svg viewBox="0 0 20 20" fill="none" stroke="#ffffff" strokeWidth="2" className="w-5 h-5">
                   <path d="M 8 4 L 16 10 L 8 16 M 4 4 L 12 10 L 4 16" />
                 </svg>
               </div>
@@ -122,22 +122,22 @@ const AboutMe = () => {
             <div className="relative w-full lg:w-[440px]" style={{ maxWidth: '440px' }}>
               
               {/* red ambient glow behind portrait */}
-              <div className="absolute inset-0 bg-[#ff1919] blur-[70px] opacity-20 transform scale-90" />
+              <div className="absolute inset-0 bg-[#ffffff] blur-[70px] opacity-20 transform scale-90" />
 
               {/* HUD / film card container */}
               <div className="relative border border-[#2a2a2a] bg-[#000000] p-3 shadow-2xl">
                 
                 {/* HUD Corner Brackets */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 border-t-[3px] border-l-[3px] border-[#ff1919] opacity-80 shadow-[0_0_8px_rgba(255,25,25,0.8)] z-20 pointer-events-none" />
-                <div className="absolute -top-3 -right-3 w-8 h-8 border-t-[3px] border-r-[3px] border-[#ff1919] opacity-80 shadow-[0_0_8px_rgba(255,25,25,0.8)] z-20 pointer-events-none" />
-                <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-[3px] border-l-[3px] border-[#ff1919] opacity-80 shadow-[0_0_8px_rgba(255,25,25,0.8)] z-20 pointer-events-none" />
-                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-[3px] border-r-[3px] border-[#ff1919] opacity-80 shadow-[0_0_8px_rgba(255,25,25,0.8)] z-20 pointer-events-none" />
+                <div className="absolute -top-3 -left-3 w-8 h-8 border-t-[3px] border-l-[3px] border-[#ffffff] opacity-80 shadow-[0_0_8px_rgba(255,255,255,0.8)] z-20 pointer-events-none" />
+                <div className="absolute -top-3 -right-3 w-8 h-8 border-t-[3px] border-r-[3px] border-[#ffffff] opacity-80 shadow-[0_0_8px_rgba(255,255,255,0.8)] z-20 pointer-events-none" />
+                <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-[3px] border-l-[3px] border-[#ffffff] opacity-80 shadow-[0_0_8px_rgba(255,255,255,0.8)] z-20 pointer-events-none" />
+                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-[3px] border-r-[3px] border-[#ffffff] opacity-80 shadow-[0_0_8px_rgba(255,255,255,0.8)] z-20 pointer-events-none" />
 
                 {/* top metadata bar */}
                 <div className="flex justify-between items-center pb-3 border-b border-[#222] mb-3">
                   <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.3em] text-[#555] uppercase">APRL 10</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#ff1919] uppercase flex items-center gap-2 drop-shadow-[0_0_4px_rgba(255,25,25,0.8)]">
-                    <span className="w-2 h-2 rounded-full bg-[#ff1919] animate-pulse inline-block" />
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#ffffff] uppercase flex items-center gap-2 drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]">
+                    <span className="w-2 h-2 rounded-full bg-[#ffffff] animate-pulse inline-block" />
                     REC
                   </span>
                 </div>
@@ -171,16 +171,16 @@ const AboutMe = () => {
 
                   {/* Sci-Fi Gradients & Overlays */}
                   {/* Red Tint & Glow */}
-                  <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-50 bg-[radial-gradient(ellipse_at_center,rgba(255,25,25,0.7)_0%,transparent_70%)]" />
+                  <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-50 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.7)_0%,transparent_70%)]" />
                   
                   {/* Horizontal Glitch / Scanline effect */}
-                  <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(255,255,255,0)_50%,rgba(255,25,25,0.2)_50%)]" style={{ backgroundSize: '100% 4px' }} />
+                  <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(255,255,255,0)_50%,rgba(255,255,255,0.2)_50%)]" style={{ backgroundSize: '100% 4px' }} />
                   
                   {/* Red horizontal flair */}
-                  <div className="absolute top-[30%] left-[-10%] right-[-10%] h-[2px] bg-[#ff1919] opacity-50 blur-[2px] transform -rotate-1" />
+                  <div className="absolute top-[30%] left-[-10%] right-[-10%] h-[2px] bg-[#ffffff] opacity-50 blur-[2px] transform -rotate-1" />
                   <div className="absolute top-[30%] left-[10%] right-[10%] h-[1px] bg-white opacity-70" />
 
-                  <div className="absolute bottom-[25%] left-[-20%] right-[-10%] h-[4px] bg-[#ff1919] opacity-40 blur-[4px] transform rotate-1" />
+                  <div className="absolute bottom-[25%] left-[-20%] right-[-10%] h-[4px] bg-[#ffffff] opacity-40 blur-[4px] transform rotate-1" />
                   <div className="absolute bottom-[25%] left-[-5%] right-[20%] h-[1px] bg-white opacity-60" />
                   
                   {/* Center Crosshair Overlay */}
@@ -199,7 +199,7 @@ const AboutMe = () => {
 
                 {/* bottom status bar */}
                 <div className="flex justify-between items-center pt-3 border-t border-[#222] mt-3">
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#ff1919] uppercase drop-shadow-[0_0_3px_rgba(255,25,25,0.8)]">SYSTEM: ONLINE</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#ffffff] uppercase drop-shadow-[0_0_3px_rgba(255,255,255,0.8)]">SYSTEM: ONLINE</span>
                   <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#555] uppercase">ID: VIBE_001</span>
                 </div>
                 
