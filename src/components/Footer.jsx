@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { FaMusic, FaFacebook, FaXTwitter, FaYoutube, FaInstagram, FaGithub, FaLinkedin, FaDribbble } from 'react-icons/fa6';
 
@@ -20,16 +21,33 @@ const Chip = ({ label }) => (
 );
 
 const Footer = () => {
+  const formRef = useRef();
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // 'idle', 'sending', 'sent', 'error'
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      setFormState({ name: '', email: '', message: '' });
-    }, 4000);
+    
+    if (status === 'sending') return;
+    setStatus('sending');
+
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      formRef.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
+      setStatus('sent');
+      setTimeout(() => {
+        setStatus('idle');
+        setFormState({ name: '', email: '', message: '' });
+      }, 4000);
+    }, (error) => {
+      console.error('FAILED...', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    });
   };
 
   const inputStyle = {
@@ -154,13 +172,14 @@ const Footer = () => {
                   </span>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-12">
+                <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-12">
                   <div className="flex flex-col gap-3">
                     <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="px-4 text-[11px] tracking-[0.2em] text-[#555] font-bold uppercase">
                       [ IDENTIFIER ]
                     </span>
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="YOUR NAME"
                       value={formState.name}
@@ -178,6 +197,7 @@ const Footer = () => {
                     </span>
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder="EMAIL ADDRESS"
                       value={formState.email}
@@ -195,6 +215,7 @@ const Footer = () => {
                     </span>
                     <textarea
                       rows={1}
+                      name="message"
                       required
                       placeholder="PROJECT DETAILS"
                       value={formState.message}
@@ -212,13 +233,13 @@ const Footer = () => {
                     type="submit"
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
-                      backgroundColor: sent ? '#ffffff' : '#000000',
-                      color: sent ? '#000000' : '#ffffff',
+                      backgroundColor: status === 'sent' ? '#ffffff' : (status === 'error' ? '#ff0000' : '#000000'),
+                      color: status === 'sent' ? '#000000' : '#ffffff',
                       border: '2px solid #000000',
                     }}
                     className="w-full py-5 mt-8 text-base font-bold tracking-[0.2em] uppercase transition-colors"
                   >
-                    {sent ? 'TRANSMISSION SENT ✓' : 'EXECUTE SUBMIT'}
+                    {status === 'sending' ? 'TRANSMITTING...' : status === 'sent' ? 'TRANSMISSION SENT ✓' : status === 'error' ? 'ERROR: CHECK KEYS' : 'EXECUTE SUBMIT'}
                   </motion.button>
                 </form>
                 
