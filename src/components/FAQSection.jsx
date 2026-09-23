@@ -25,9 +25,9 @@ const DEFAULT_FAQ_ITEMS = [
     id: '01',
     question: 'HOW DO YOU WORK?',
     content: (
-      <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+      <p className="font-hud text-sm leading-relaxed" style={{ textTransform: 'uppercase' }}>
         Vibe coding at the speed of thought, leveraging AI models for high-agency, hyper-rapid prototypes.
-        We skip the bloat and go straight to pixel-perfect execution — from first idea to shipped product,
+        I skip the bloat and go straight to pixel-perfect execution — from first idea to shipped product,
         faster than most teams write a PRD.
       </p>
     )
@@ -37,7 +37,7 @@ const DEFAULT_FAQ_ITEMS = [
     question: "WHAT'S THE TECH?",
     content: (
       <div className="flex flex-col gap-4">
-        <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+        <p className="font-hud text-sm leading-relaxed" style={{ textTransform: 'uppercase' }}>
           A bleeding-edge stack chosen for raw speed and extreme quality:
         </p>
         <div className="flex flex-wrap gap-2">
@@ -52,8 +52,8 @@ const DEFAULT_FAQ_ITEMS = [
     id: '03',
     question: 'DO YOU TAKE ON IMPOSSIBLE DEADLINES?',
     content: (
-      <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
-        Only if the vibe is right. The more chaotic the scope, the harder we lock in.
+      <p className="font-hud text-sm leading-relaxed" style={{ textTransform: 'uppercase' }}>
+        Only if the vibe is right. The more chaotic the scope, the harder I lock in.
         Building the unbuildable is the entire point.
       </p>
     )
@@ -75,33 +75,24 @@ const FaqItem = ({ item, isOpen, onToggle }) => (
 
     <div
       onClick={onToggle}
-      className="relative cursor-pointer border border-[#ffffff] bg-[#0a0a0a] transition-colors duration-300 group-hover:bg-[#0d0909]"
+      className="relative cursor-pointer border border-[rgba(255,255,255,0.08)] bg-transparent transition-colors duration-300 hover:bg-[#0a0a0a]"
       style={{
-        // chamfered top-left + bottom-right corners
         clipPath: 'polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px)'
       }}
     >
-      {/* noise layer on hover */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500 mix-blend-overlay"
-        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
-      />
-
-      {/* question row */}
       <button
         className="relative z-10 w-full flex items-center justify-between gap-6 px-6 py-5 md:px-8 md:py-6 text-left"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-5 min-w-0">
           <span
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            className="shrink-0 text-xs font-bold tracking-[0.25em] text-[#ffffff]"
+            className="font-hud shrink-0 text-xs font-bold"
+            style={{ color: '#ffffff' }}
           >
-            {item.id} /
+            [{item.id}]
           </span>
           <span
-            style={{ fontFamily: "'Syne', sans-serif" }}
+            style={{ fontFamily: 'var(--font-inter)' }}
             className={`font-bold uppercase tracking-tight transition-colors duration-200 text-base md:text-xl ${isOpen ? 'text-white' : 'text-white/80 group-hover:text-white'}`}
           >
             {item.question}
@@ -159,7 +150,7 @@ const FAQSection = () => {
           question: f.question,
           content: (
             <div className="flex flex-col gap-4">
-              <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[#888] text-sm leading-relaxed tracking-wide">
+              <p className="font-hud text-sm leading-relaxed" style={{ textTransform: 'uppercase' }}>
                 {f.answer}
               </p>
               {f.tags && f.tags.length > 0 && (
@@ -180,18 +171,35 @@ const FAQSection = () => {
   const toggle = (id) => setOpenId(prev => prev === id ? null : id);
 
   return (
-    <section id="faq-specs" className="relative w-full min-h-screen flex items-center justify-center bg-[#000000] overflow-hidden" style={{ padding: '8vw 0' }}>
+    <section id="faq-specs" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-transparent" style={{ padding: '8vw 0' }}>
 
-      {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#ffffff] rounded-full blur-[150px] opacity-[0.03] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#ffffff] rounded-full blur-[120px] opacity-[0.05] pointer-events-none" />
-
-      {/* subtle grain */}
+      {/* Scanline texture */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.04] mix-blend-screen"
-        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.15) 2px, rgba(255,255,255,0.15) 4px)',
+          backgroundSize: '100% 4px'
+        }}
       />
+
+      {/* Film-strip perforations */}
+      <div className="absolute top-0 bottom-0 left-0 w-5 flex flex-col justify-between py-4 z-10 pointer-events-none" style={{ borderRight: '1px solid rgba(255,255,255,0.04)' }}>
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div key={i} className="w-2.5 h-2.5 mx-auto border border-[rgba(255,255,255,0.06)] bg-[#060606] rounded-[1px]" />
+        ))}
+      </div>
+      <div className="absolute top-0 bottom-0 right-0 w-5 flex flex-col justify-between py-4 z-10 pointer-events-none" style={{ borderLeft: '1px solid rgba(255,255,255,0.04)' }}>
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div key={i} className="w-2.5 h-2.5 mx-auto border border-[rgba(255,255,255,0.06)] bg-[#060606] rounded-[1px]" />
+        ))}
+      </div>
+
+      {/* Top section metadata */}
+      <div className="absolute top-6 left-10 right-10 z-20 flex justify-between items-center pointer-events-none">
+        <span className="font-hud text-[9px] text-[rgba(255,255,255,0.2)]">SEC_04 // FAQ</span>
+        <span className="font-hud text-[9px] text-[rgba(255,255,255,0.15)]">FRAME 04 OF 05</span>
+      </div>
 
       {/* ── content wrapper ────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
@@ -207,23 +215,34 @@ const FAQSection = () => {
             className="flex flex-col lg:w-1/2 z-20"
           >
             <div className="mb-6 relative">
+              {/* Decorative line */}
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-8 h-[1px] bg-[rgba(255,255,255,0.15)]" />
+                <span className="font-hud text-[10px] text-[rgba(255,255,255,0.35)]">INTEL BRIEFING</span>
+                <div className="w-8 h-[1px] bg-[rgba(255,255,255,0.15)]" />
+              </div>
+
               <h2
-                style={{ fontFamily: "'Syne', sans-serif" }}
-                className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
+                style={{ fontFamily: 'var(--font-inter)' }}
+                className="text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
               >
                 HAVE <br className="hidden lg:block" />
                 QUESTIONS?
               </h2>
               <div className="relative inline-block mt-2">
                 <h2
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ffffff]"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                  className="text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold uppercase leading-[0.9] tracking-tight text-[#ffffff]"
                 >
-                  WE HAVE <br className="hidden lg:block" />
+                  I HAVE <br className="hidden lg:block" />
                   ANSWERS.
                 </h2>
-                {/* hand-drawn accent arrow */}
-                <RedCurveArrow className="absolute -top-6 -right-12 lg:-top-12 lg:-right-16 w-16 h-12 lg:w-20 lg:h-14 opacity-70 pointer-events-none transform rotate-12" />
+              </div>
+
+              {/* Decorative element */}
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-12 h-[2px] bg-white opacity-20" />
+                <div className="w-2 h-2 border border-[rgba(255,255,255,0.15)] rotate-45" />
               </div>
             </div>
           </motion.div>

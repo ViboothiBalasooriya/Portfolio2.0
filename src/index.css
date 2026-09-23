@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Archivo+Black&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -14,20 +16,20 @@
 
 :root {
   /* Core palette */
-  --bg: #ffffff;
-  --bg-dark: #0a0a0a;
-  --bg-cream: #f7f5f2;
-  --text: #0a0a0a;
+  --bg: #080808; /* Deep moody background */
+  --bg-dark: #080808;
+  --bg-cream: #080808; /* Override cream with dark for brutalist consistency */
+  --text: #ffffff;
   --text-light: #ffffff;
-  --muted: #6b6b6b;
+  --muted: #737373; /* Muted gray for HUD */
   --muted-light: #999999;
-  --accent: #FF5C00;
-  --accent-hover: #E85400;
-  --button-bg: #0a0a0a;
+  --accent: #ffffff; /* Changed accent to stark white for high contrast */
+  --accent-hover: #cccccc;
+  --button-bg: #111111;
   --button-text: #ffffff;
-  --border-soft: rgba(0, 0, 0, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.08); /* Low opacity borders */
   --border-dark: rgba(255, 255, 255, 0.1);
-  --green: #17c964;
+  --green: #ffffff; /* Override any playful colors with stark white/gray */
   
   --color-surface-white: #e2e8f0;
   --color-text-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
@@ -199,10 +201,117 @@ body {
   left: 0;
   right: 0;
   height: 178px;
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.4) 40%, #ffffff 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 8, 0.4) 40%, #080808 100%);
   pointer-events: none;
   z-index: 10;
 }
+
+/* ═══════════════════════════════════════
+   Scrapbook / Y2K Neo-Grunge Utilities
+   ═══════════════════════════════════════ */
+
+/* Polaroid Photo Card */
+.polaroid-frame {
+  background: #fdfbf7;
+  padding: 14px 14px 48px 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: rotate(-3.5deg);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(-1deg) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
+}
+
+.polaroid-frame img {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(120%) brightness(95%);
+}
+
+.polaroid-caption {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'Caveat', cursive;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.polaroid-caption-small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+/* Circular Badge Slow Spin Animation */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* ═══════════════════════════════════════
+   Cinematic Dark Brutalist Utilities
+   ═══════════════════════════════════════ */
+
+.bg-radial-vignette {
+  background: radial-gradient(circle at center, #141414 0%, #080808 80%);
+}
+
+.font-hud {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.border-brutalist {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.img-brutalist {
+  filter: grayscale(100%) contrast(125%) brightness(85%);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.perspective-card:hover .img-brutalist,
+.img-card:hover .img-brutalist,
+.gallery__item:hover .img-brutalist {
+  filter: grayscale(100%) brightness(100%) contrast(110%);
+  transform: scale(1.02);
+}
+
+.hud-crosshair {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 10;
+}
+.hud-crosshair::before, .hud-crosshair::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.hud-crosshair::before { width: 10px; height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
+.hud-crosshair::after { width: 1px; height: 10px; left: 50%; top: 0; transform: translateX(-50%); }
+
+.hud-tl { top: 12px; left: 12px; }
+.hud-tr { top: 12px; right: 12px; }
+.hud-bl { bottom: 12px; left: 12px; }
+.hud-br { bottom: 12px; right: 12px; }
 
 /* Section container */
 .section-container {
@@ -255,7 +364,7 @@ body {
 }
 
 .dark-pill:hover {
-  background-color: #1a1a1a;
+  background-color: #222222;
   transform: translateY(-2px);
 }
 
@@ -288,20 +397,20 @@ body {
 
 /* Section label (small uppercase) */
 .section-label {
-  font-family: var(--font-inter);
-  font-size: 13px;
-  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
+  letter-spacing: 0.15em;
+  color: var(--muted);
 }
 
 .section-label-muted {
-  font-family: var(--font-inter);
-  font-size: 13px;
-  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   color: var(--muted);
 }
 

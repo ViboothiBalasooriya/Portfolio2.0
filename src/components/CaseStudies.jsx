@@ -90,12 +90,13 @@ const ProjectCard = ({ project, index }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: EASE }}
-      className="group relative overflow-hidden aspect-[4/3] cursor-pointer bg-[#ffffff]"
+      className="group relative overflow-hidden aspect-[4/3] cursor-pointer border-brutalist"
+      style={{ backgroundColor: 'transparent' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={project.image} alt={project.title} className="absolute h-full w-full object-cover" style={{ filter: 'grayscale(100%)', ...project.cropStyle }} />
+      <img src={project.image} alt={project.title} className="absolute h-full w-full object-cover img-brutalist" style={{ ...project.cropStyle }} />
       
       <PixelOverlay isHovered={isHovered} />
       
@@ -103,13 +104,13 @@ const ProjectCard = ({ project, index }) => {
         <MagneticSquare key={i} sqX={sq.x} sqY={sq.y} size={sq.size} mouseX={mouseX} mouseY={mouseY} isHovered={isHovered} />
       ))}
 
-      <div className="absolute right-0 top-0 z-10 flex items-center justify-center bg-[#ffffff]" style={{ width: '48px', height: '48px' }}>
-        <span style={{ fontSize: '24px', fontWeight: 900, color: '#0a0a0a', fontFamily: 'var(--font-inter)' }}>+</span>
+      <div className="absolute right-0 top-0 z-10 flex items-center justify-center bg-transparent" style={{ width: '48px', height: '48px' }}>
+        <div className="hud-crosshair hud-tr"></div>
       </div>
 
-      <div className="absolute bottom-0 left-0 z-20 bg-[#ffffff]" style={{ padding: '24px 32px', maxWidth: '90%' }}>
-        <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(20px, 2.5vw, 32px)', textTransform: 'uppercase', color: '#0a0a0a', lineHeight: 1, marginBottom: '12px' }}>{project.title}</h3>
-        <div style={{ fontFamily: 'monospace', fontWeight: 600, color: '#0a0a0a', fontSize: '13px', textTransform: 'uppercase', display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+      <div className="absolute bottom-0 left-0 z-20" style={{ padding: '24px 32px', maxWidth: '90%', background: 'linear-gradient(0deg, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0) 100%)', width: '100%' }}>
+        <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(20px, 2.5vw, 32px)', textTransform: 'uppercase', color: '#ffffff', lineHeight: 1, marginBottom: '12px' }}>{project.title}</h3>
+        <div className="font-hud" style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
           <span>{project.category}</span>
           <span>{project.year}</span>
         </div>
@@ -213,7 +214,7 @@ const CaseStudies = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="projects-list" className="relative w-full bg-[#ffffff] pt-[15vh] pb-10" style={{ minHeight: '100vh' }}>
+    <section ref={sectionRef} id="projects-list" className="relative w-full pt-[15vh] pb-10" style={{ minHeight: '100vh', backgroundColor: 'transparent' }}>
       <style>
         {`
           @keyframes marqueeProjects {
@@ -246,8 +247,8 @@ const CaseStudies = () => {
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
-            color: '#0a0a0a',
-            borderBottom: '4px solid #0a0a0a',
+            color: '#ffffff',
+            borderBottom: '4px solid rgba(255, 255, 255, 0.08)',
             display: 'inline-block',
             paddingBottom: '12px',
             marginBottom: '40px'
@@ -267,15 +268,17 @@ const CaseStudies = () => {
       </div>
 
       {/* Footer Area with Seamless Full Bleed Background */}
-      <div className="relative w-full overflow-hidden min-h-[60vh] lg:min-h-[85vh]" style={{ margin: '8vh 0 0' }}>
+      <div className="relative w-full overflow-hidden min-h-[60vh] lg:min-h-[85vh] border-t border-b border-brutalist" style={{ margin: '8vh 0 0' }}>
         
         {/* Full Width Image Background */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-[#e5e5e5] overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <img 
             src="/sitting_man.png" 
             alt="Portrait" 
-            className="absolute top-0 left-0 w-full max-w-none h-full object-cover object-[20%_25%] grayscale" 
+            className="absolute top-0 left-0 w-full max-w-none h-full object-cover object-[20%_25%] img-brutalist" 
+            style={{ filter: 'grayscale(100%) contrast(140%) brightness(50%)' }}
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/80 to-transparent"></div>
         </div>
 
         {/* Main Content Container */}
@@ -284,11 +287,11 @@ const CaseStudies = () => {
             
             {/* Left Column: Text & CTA */}
             <div className="py-16 lg:py-48 pointer-events-auto" style={{ maxWidth: '48rem', paddingLeft: '250px' }}>
-              <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(32px, 6vw, 64px)', textTransform: 'uppercase', color: '#0a0a0a', marginBottom: '24px', lineHeight: 1 }}>LET'S WORK TOGETHER</h3>
-              <p style={{ fontFamily: 'monospace', fontSize: '18px', color: '#0a0a0a', lineHeight: 1.6, textTransform: 'uppercase', fontWeight: 600 }}>
-                We partner with ambitious brands that are ready to move beyond fragmented visuals and shallow quick fixes.
+              <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(32px, 6vw, 64px)', textTransform: 'uppercase', color: '#ffffff', marginBottom: '24px', lineHeight: 1 }}>LET'S WORK TOGETHER</h3>
+              <p className="font-hud" style={{ fontSize: '14px', lineHeight: 1.6, textTransform: 'uppercase' }}>
+                I partner with ambitious brands that are ready to move beyond fragmented visuals and shallow quick fixes.
               </p>
-              <button className="group mt-20 flex items-center justify-center bg-[#0a0a0a] text-[#ffffff] hover:bg-white hover:text-black transition-colors" style={{ padding: '24px 40px', fontFamily: 'var(--font-inter)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '20px', lineHeight: 1 }}>
+              <button className="group mt-20 flex items-center justify-center border-brutalist bg-transparent text-[#ffffff] hover:bg-white hover:text-black transition-colors" style={{ padding: '24px 40px', fontFamily: 'var(--font-inter)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '20px', lineHeight: 1 }}>
                 <span style={{ transform: 'translateY(2px)' }}>START A PROJECT</span>
                 <div className="ml-4 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-2">
                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -304,7 +307,7 @@ const CaseStudies = () => {
         </div>
       </div>
       
-      <div className="w-full overflow-hidden" style={{ borderTop: '4px solid #0a0a0a', borderBottom: '4px solid #0a0a0a' }}>
+      <div className="w-full overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <TechMarquee />
       </div>
       

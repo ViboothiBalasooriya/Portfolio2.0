@@ -132,6 +132,13 @@ const FolioHero = () => {
 
   const controls = useAnimation();
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [textIndex, setTextIndex] = useState(0);
+
+  const phrases = [
+    "HI, I'M VIBOOTHI",
+    "I'M A DEVELOPER",
+    "I'M A DESIGNER"
+  ];
 
   // Detect scroll to lock the text
   useEffect(() => {
@@ -177,9 +184,16 @@ const FolioHero = () => {
           await new Promise(r => { timeoutId = setTimeout(r, 100); });
           waited += 100;
         }
+
+        if (isMounted && !hasScrolled) {
+          setTextIndex(prev => (prev + 1) % phrases.length);
+          // Wait for React to re-render the new text in the DOM before animating to visible
+          await new Promise(r => { timeoutId = setTimeout(r, 100); });
+        }
       }
       
       if (isMounted && hasScrolled) {
+        setTextIndex(0); // Force back to initial text for GSAP 'zoom-o' compatibility
         controls.set("visible");
       }
     };
@@ -320,7 +334,7 @@ const FolioHero = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-end', // Moved to right
           justifyContent: 'center',
           padding: '0 var(--side-padding)',
         }}
@@ -332,11 +346,12 @@ const FolioHero = () => {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
+            alignItems: 'flex-end', // Aligned content right
+            textAlign: 'right', // Aligned text right
             width: '100%',
             maxWidth: '1200px',
-            marginTop: '15vh',
+            marginTop: '55vh', // Moved further down again
+            paddingRight: '5%', // Padding on the right instead of left
           }}
         >
           {/* Main Name - Typewriter Effect */}
@@ -354,7 +369,7 @@ const FolioHero = () => {
             style={{
               fontFamily: 'var(--font-inter)',
               fontWeight: 900,
-              fontSize: 'clamp(40px, 9vw, 150px)',
+              fontSize: 'clamp(32px, 7vw, 120px)',
               letterSpacing: '-0.02em',
               lineHeight: 1,
               color: '#ffffff',
@@ -363,7 +378,7 @@ const FolioHero = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            {"HI, I'M VIBOOTHI".split("").map((char, index) => (
+            {phrases[textIndex].split("").map((char, index) => (
               <motion.span
                 key={index}
                 className={index === 11 ? "zoom-o" : ""}
@@ -383,7 +398,7 @@ const FolioHero = () => {
               style={{
                 display: 'inline-block',
                 width: 'clamp(4px, 1vw, 12px)',
-                height: 'clamp(30px, 7vw, 120px)',
+                height: 'clamp(24px, 5.5vw, 90px)',
                 backgroundColor: '#ffffff',
                 marginLeft: '8px',
                 verticalAlign: 'text-bottom',
@@ -397,11 +412,11 @@ const FolioHero = () => {
               fontFamily: 'monospace, var(--font-inter)',
               fontSize: 'clamp(14px, 1.5vw, 18px)',
               fontWeight: 400,
-              color: '#ffffff', // Changed to white
+              color: '#ffffff',
               lineHeight: 1.6,
               marginBottom: '24px',
               maxWidth: '900px',
-              textAlign: 'center',
+              textAlign: 'right', // Aligned text right
             }}
           >
             {scrambledDescription || '\u00A0'}

@@ -126,10 +126,15 @@ const ProjectsBentoGallery = () => {
               }}
             >
               {proj.type === 'text' ? (
-                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="border-brutalist" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#050505' }}>
+                  <div className="hud-crosshair hud-tl"></div>
+                  <div className="hud-crosshair hud-tr"></div>
+                  <div className="hud-crosshair hud-bl"></div>
+                  <div className="hud-crosshair hud-br"></div>
+                  <span className="font-hud" style={{ position: 'absolute', top: '12px', left: '24px', fontSize: '10px' }}>[SYS-CORE]</span>
                   <h2 className="gallery-text-content" style={{ 
                     fontFamily: 'var(--font-inter)', 
-                    fontWeight: 400, 
+                    fontWeight: 700, 
                     color: '#ffffff', 
                     fontSize: 'clamp(16px, 2.5vw, 32px)', 
                     textTransform: 'uppercase', 
@@ -143,12 +148,22 @@ const ProjectsBentoGallery = () => {
                   </h2>
                 </div>
               ) : (
-                <motion.img 
-                  layoutId={`project-img-${proj.id}`} 
-                  src={proj.img} 
-                  alt="" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)' }} 
-                />
+                <div className="border-brutalist" style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
+                  <div className="hud-crosshair hud-tl"></div>
+                  <div className="hud-crosshair hud-tr"></div>
+                  <div className="hud-crosshair hud-bl"></div>
+                  <div className="hud-crosshair hud-br"></div>
+                  <span className="font-hud" style={{ position: 'absolute', top: '12px', left: '24px', fontSize: '10px', zIndex: 11 }}>
+                    [PRJ-{String(proj.id).substring(0, 4).toUpperCase()}]
+                  </span>
+                  <motion.img 
+                    layoutId={`project-img-${proj.id}`} 
+                    src={proj.img} 
+                    alt="" 
+                    className="img-brutalist"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  />
+                </div>
               )}
             </div>
           ))}

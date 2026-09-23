@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const words = [
-  "PUSHING", "PIXELS,", "OPTIMIZING", "LOGIC,", "AND", "TURNING", "VISION", 
-  "INTO", "REALITY.", "DEFINING", "A", "CREATIVE", "AND", "TECHNICAL", 
+  "I'M", "PUSHING", "PIXELS,", "OPTIMIZING", "LOGIC,", "AND", "TURNING", "MY", "VISION", 
+  "INTO", "REALITY.", "DEFINING", "MY", "CREATIVE", "AND", "TECHNICAL", 
   "LEGACY", "IN", "DESIGN", "AND", "CODE—ON", "AND", "OFF", "THE", "SCREEN."
 ];
 
@@ -24,7 +24,7 @@ const BioTextSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-[#000000] overflow-hidden" style={{ padding: '8vw 0' }}>
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-transparent overflow-hidden" style={{ padding: '8vw 0' }}>
       <motion.div
         variants={containerVariants}
         initial="hidden"

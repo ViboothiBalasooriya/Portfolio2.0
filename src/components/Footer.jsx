@@ -3,27 +3,43 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { FaMusic, FaFacebook, FaXTwitter, FaYoutube, FaInstagram, FaGithub, FaLinkedin, FaDribbble } from 'react-icons/fa6';
 
-/* ─── hand-drawn SVG accents ─────────────────────────────── */
-const RedScribbleUnderline = () => (
-  <svg viewBox="0 0 600 12" preserveAspectRatio="none" fill="none" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" className="absolute left-0 -bottom-2 w-full h-3 opacity-90">
-    <path d="M 2 8 C 80 2, 200 10, 320 4 C 440 -2, 530 8, 598 4" />
-    <path d="M 50 10 C 200 6, 400 12, 550 8" strokeWidth="1" opacity="0.5"/>
-  </svg>
+/* ─── film-strip perforations ─────────────────────────────── */
+const FilmPerf = ({ side = 'left', count = 18 }) => (
+  <div
+    className={`absolute top-0 bottom-0 ${side === 'left' ? 'left-0' : 'right-0'} w-5 flex flex-col justify-between py-4 z-20 pointer-events-none`}
+    style={{ borderRight: side === 'left' ? '1px solid rgba(255,255,255,0.04)' : 'none', borderLeft: side === 'right' ? '1px solid rgba(255,255,255,0.04)' : 'none' }}
+  >
+    {Array.from({ length: count }).map((_, i) => (
+      <div key={i} className="w-2.5 h-2.5 mx-auto border border-[rgba(255,255,255,0.06)] bg-[#060606] rounded-[1px]" />
+    ))}
+  </div>
 );
 
-const Chip = ({ label }) => (
-  <span
-    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-    className="inline-block text-[10px] font-medium tracking-[0.1em] uppercase text-[#333] border border-[#ccc] px-3 py-1.5"
-  >
-    {label}
-  </span>
+/* ─── scanline overlay ────────────────────────────────────── */
+const ScanlineOverlay = () => (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 z-10 opacity-[0.03]"
+    style={{
+      backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.15) 2px, rgba(255,255,255,0.15) 4px)',
+      backgroundSize: '100% 4px'
+    }}
+  />
+);
+
+/* ─── HUD data readout line ───────────────────────────────── */
+const HudDataLine = ({ label, value }) => (
+  <div className="flex items-center gap-3">
+    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.25)]">{label}</span>
+    <span className="flex-1 border-b border-dotted border-[rgba(255,255,255,0.06)]" />
+    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.4)]">{value}</span>
+  </div>
 );
 
 const Footer = () => {
   const formRef = useRef();
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // 'idle', 'sending', 'sent', 'error'
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,129 +68,160 @@ const Footer = () => {
 
   const inputStyle = {
     width: '100%',
-    padding: '16px 16px 24px 16px',
+    padding: '14px 0 14px 0',
     border: 'none',
-    borderBottom: '2px solid #ddd',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
     backgroundColor: 'transparent',
-    color: '#000000',
+    color: '#ffffff',
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 'clamp(15px, 1.5vw, 19px)',
+    fontSize: 'clamp(13px, 1.2vw, 16px)',
     fontWeight: 500,
     outline: 'none',
-    transition: 'border-color 0.3s',
+    transition: 'border-color 0.4s ease',
     textTransform: 'uppercase',
+    letterSpacing: '0.08em',
   };
 
   return (
-    <section className="relative w-full overflow-x-hidden flex flex-col font-sans bg-[#ffffff]" style={{ minHeight: '100vh', padding: '8vw 0 0 0' }}>
-      
-      {/* Background Lighting Effects */}
-      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-[#000000] rounded-full blur-[150px] opacity-[0.02] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#000000] rounded-full blur-[120px] opacity-[0.03] pointer-events-none" />
-      
-      {/* subtle grain */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.04] mix-blend-multiply"
-        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
-      />
+    <section id="contact" className="relative w-full overflow-hidden flex flex-col bg-transparent" style={{ minHeight: '100vh' }}>
 
-      {/* Content Wrapper for Form */}
-      <div className="relative z-10 w-full flex flex-col flex-grow justify-center items-center pb-24 px-6 md:px-12">
-        
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:gap-32 w-full lg:w-fit mx-auto">
-          
+      {/* Atmospheric glow - very subtle */}
+      <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-white rounded-full blur-[200px] opacity-[0.015] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-white rounded-full blur-[180px] opacity-[0.02] pointer-events-none" />
+
+      {/* Film-strip perforations on edges */}
+      <FilmPerf side="left" />
+      <FilmPerf side="right" />
+
+      {/* Scanline texture */}
+      <ScanlineOverlay />
+
+      {/* ── Top metadata bar ──────────────────────────────── */}
+      <div className="relative z-20 w-full border-b border-[rgba(255,255,255,0.05)] px-8 md:px-16 py-4">
+        <div className="flex justify-between items-center max-w-[1400px] mx-auto">
+          <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">SEC_05 // CONTACT</span>
+          <div className="flex items-center gap-4">
+            <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">COMMS CHANNEL</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse opacity-60" />
+            <span className="font-hud text-[9px] text-white opacity-60">OPEN</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main content ──────────────────────────────────── */}
+      <div className="relative z-20 w-full flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-20 w-full max-w-[1400px] mx-auto">
+
           {/* LEFT COLUMN — Heading & Direct Contact */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-12 lg:gap-16 z-20 shrink-0"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-10 lg:gap-14 z-20 shrink-0 lg:w-[45%]"
           >
-            {/* ── heading ──────────────────────────────────────── */}
+            {/* Heading */}
             <div>
-              <div className="flex items-center gap-3 mb-6 opacity-60">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#000000" strokeWidth="2" className="w-5 h-5">
-                  <path d="M 12 4 L 4 10 L 12 16 M 16 4 L 8 10 L 16 16" />
-                </svg>
-                <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[11px] font-medium tracking-[0.2em] text-[#555] uppercase">
-                  INITIATE COMMS
-                </p>
-                <svg viewBox="0 0 20 20" fill="none" stroke="#000000" strokeWidth="2" className="w-5 h-5">
-                  <path d="M 8 4 L 16 10 L 8 16 M 4 4 L 12 10 L 4 16" />
-                </svg>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-8 h-[1px] bg-[rgba(255,255,255,0.15)]" />
+                <span className="font-hud text-[10px] text-[rgba(255,255,255,0.35)]">INITIATE COMMS</span>
+                <div className="w-8 h-[1px] bg-[rgba(255,255,255,0.15)]" />
               </div>
 
               <h2
                 style={{ fontFamily: "'Syne', sans-serif" }}
-                className="text-6xl md:text-7xl lg:text-[6rem] font-extrabold uppercase leading-[0.9] tracking-tight text-black drop-shadow-sm"
+                className="text-5xl md:text-6xl lg:text-[5rem] font-extrabold uppercase leading-[0.85] tracking-tight text-white"
               >
                 LET'S <br />
-                <span className="text-[#000000]">TALK.</span>
+                TALK.
               </h2>
+
+              {/* Decorative line under heading */}
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-12 h-[2px] bg-white opacity-30" />
+                <div className="w-2 h-2 border border-[rgba(255,255,255,0.2)] rotate-45" />
+              </div>
             </div>
 
-            {/* Direct Contact & Socials */}
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col gap-2">
-                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#000000] uppercase">
+            {/* Direct Contact */}
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-3">
+                <span className="font-hud text-[10px] text-[rgba(255,255,255,0.35)]">
                   [ DIRECT CONTACT ]
                 </span>
                 <a
                   href="mailto:viboothi@gmail.com"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                  className="text-4xl md:text-5xl lg:text-[3rem] font-bold text-black hover:text-[#000000] transition-colors"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  className="text-lg md:text-xl lg:text-2xl font-bold text-white hover:text-[rgba(255,255,255,0.6)] transition-colors duration-300 tracking-wider"
                 >
                   VIBOOTHI@GMAIL.COM
                 </a>
               </div>
               
               <div className="flex flex-col gap-4">
-                <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[12px] font-bold tracking-[0.2em] text-[#000000] uppercase">
+                <span className="font-hud text-[10px] text-[rgba(255,255,255,0.35)]">
                   [ TRANSMISSION NETWORKS ]
                 </span>
-                <div className="flex items-center gap-6 mt-1">
-                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaGithub size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaLinkedin size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaXTwitter size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaDribbble size={34} /></a>
-                    <a href="#" className="text-[#222] hover:text-[#000000] transition-colors"><FaInstagram size={34} /></a>
+                <div className="flex items-center gap-5 mt-1">
+                  {[
+                    { icon: FaGithub, href: '#' },
+                    { icon: FaLinkedin, href: '#' },
+                    { icon: FaXTwitter, href: '#' },
+                    { icon: FaDribbble, href: '#' },
+                    { icon: FaInstagram, href: '#' },
+                  ].map(({ icon: Icon, href }, i) => (
+                    <a
+                      key={i}
+                      href={href}
+                      className="text-[rgba(255,255,255,0.25)] hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                    >
+                      <Icon size={24} />
+                    </a>
+                  ))}
                 </div>
               </div>
+            </div>
+
+            {/* HUD data readouts */}
+            <div className="hidden lg:flex flex-col gap-2 mt-4 opacity-70">
+              <HudDataLine label="LATITUDE" value="06.9271° N" />
+              <HudDataLine label="LONGITUDE" value="79.8612° E" />
+              <HudDataLine label="TIMEZONE" value="UTC+05:30" />
+              <HudDataLine label="STATUS" value="ACCEPTING PROJECTS" />
             </div>
           </motion.div>
 
           {/* RIGHT COLUMN — Form Card */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center z-10 w-full lg:w-[600px] shrink-0 mt-10 lg:mt-0"
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center z-10 w-full lg:w-[55%] shrink-0"
           >
-            <div className="relative w-full">
+            <div className="relative w-full max-w-[580px]">
               
-              {/* HUD / form card container */}
-              <div className="relative border-2 border-black bg-white p-10 md:p-14 shadow-2xl">
+              {/* Form card */}
+              <div className="relative bg-[rgba(255,255,255,0.01)] backdrop-blur-sm border border-[rgba(255,255,255,0.06)] p-8 md:p-12">
                 
                 {/* HUD Corner Brackets */}
-                <div className="absolute -top-[2px] -left-[2px] w-6 h-6 border-t-[3px] border-l-[3px] border-[#000000] opacity-100 pointer-events-none" />
-                <div className="absolute -top-[2px] -right-[2px] w-6 h-6 border-t-[3px] border-r-[3px] border-[#000000] opacity-100 pointer-events-none" />
-                <div className="absolute -bottom-[2px] -left-[2px] w-6 h-6 border-b-[3px] border-l-[3px] border-[#000000] opacity-100 pointer-events-none" />
-                <div className="absolute -bottom-[2px] -right-[2px] w-6 h-6 border-b-[3px] border-r-[3px] border-[#000000] opacity-100 pointer-events-none" />
+                <div className="hud-crosshair hud-tl"></div>
+                <div className="hud-crosshair hud-tr"></div>
+                <div className="hud-crosshair hud-bl"></div>
+                <div className="hud-crosshair hud-br"></div>
 
-                <div className="flex justify-between items-center pb-6 border-b border-[#ddd] mb-8">
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.3em] text-[#333] font-bold uppercase">MESSAGE PING</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] tracking-[0.2em] text-[#000000] uppercase font-bold flex items-center gap-2 drop-shadow-[0_0_4px_rgba(0,0,0,0.4)]">
-                    <span className="w-2 h-2 rounded-full bg-[#000000] animate-pulse inline-block" />
-                    AWAITING INPUT
-                  </span>
+                {/* Top metadata bar */}
+                <div className="flex justify-between items-center pb-5 border-b border-[rgba(255,255,255,0.06)] mb-8">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.5)]">INCOMING TRANSMISSION</span>
+                  </div>
+                  <span className="font-hud text-[9px] text-[rgba(255,255,255,0.25)]">ENC: AES-256</span>
                 </div>
 
-                <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-12">
-                  <div className="flex flex-col gap-3">
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="px-4 text-[11px] tracking-[0.2em] text-[#555] font-bold uppercase">
+                <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8">
+                  <div className="flex flex-col gap-2">
+                    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">
                       [ IDENTIFIER ]
                     </span>
                     <input
@@ -185,14 +232,14 @@ const Footer = () => {
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       style={inputStyle}
-                      onFocus={(e) => e.target.style.borderColor = '#000000'}
-                      onBlur={(e) => e.target.style.borderColor = '#ddd'}
-                      className="placeholder:text-[#999]"
+                      onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.4)'}
+                      onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                      className="placeholder:text-[rgba(255,255,255,0.15)]"
                     />
                   </div>
                   
-                  <div className="flex flex-col gap-3">
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="px-4 text-[11px] tracking-[0.2em] text-[#555] font-bold uppercase">
+                  <div className="flex flex-col gap-2">
+                    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">
                       [ COMMS NODE ]
                     </span>
                     <input
@@ -203,46 +250,48 @@ const Footer = () => {
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       style={inputStyle}
-                      onFocus={(e) => e.target.style.borderColor = '#000000'}
-                      onBlur={(e) => e.target.style.borderColor = '#ddd'}
-                      className="placeholder:text-[#999]"
+                      onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.4)'}
+                      onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                      className="placeholder:text-[rgba(255,255,255,0.15)]"
                     />
                   </div>
                   
-                  <div className="flex flex-col gap-3">
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="px-4 text-[11px] tracking-[0.2em] text-[#555] font-bold uppercase">
+                  <div className="flex flex-col gap-2">
+                    <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">
                       [ PAYLOAD ]
                     </span>
                     <textarea
-                      rows={1}
+                      rows={2}
                       name="message"
                       required
                       placeholder="PROJECT DETAILS"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       style={{ ...inputStyle, resize: 'none' }}
-                      onFocus={(e) => e.target.style.borderColor = '#000000'}
-                      onBlur={(e) => e.target.style.borderColor = '#ddd'}
-                      className="placeholder:text-[#999]"
+                      onFocus={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.4)'}
+                      onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                      className="placeholder:text-[rgba(255,255,255,0.15)]"
                     />
                   </div>
                   
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.01, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                    whileTap={{ scale: 0.99 }}
                     type="submit"
+                    className="w-full py-4 mt-4 border border-[rgba(255,255,255,0.1)] bg-transparent hover:border-[rgba(255,255,255,0.25)] font-hud text-[12px] text-white font-bold transition-all duration-300"
                     style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      backgroundColor: status === 'sent' ? '#ffffff' : (status === 'error' ? '#ff0000' : '#000000'),
-                      color: status === 'sent' ? '#000000' : '#ffffff',
-                      border: '2px solid #000000',
+                      backgroundColor: status === 'sent' ? 'rgba(255,255,255,0.1)' : (status === 'error' ? 'rgba(255,0,0,0.15)' : 'transparent'),
                     }}
-                    className="w-full py-5 mt-8 text-base font-bold tracking-[0.2em] uppercase transition-colors"
                   >
-                    {status === 'sending' ? 'TRANSMITTING...' : status === 'sent' ? 'TRANSMISSION SENT ✓' : status === 'error' ? 'ERROR: CHECK KEYS' : 'EXECUTE SUBMIT'}
+                    {status === 'sending' ? '[ TRANSMITTING... ]' : status === 'sent' ? '[ TRANSMISSION SENT ✓ ]' : status === 'error' ? '[ ERROR: RETRY ]' : '[ EXECUTE SUBMIT ]'}
                   </motion.button>
                 </form>
-                
+
+                {/* Bottom form metadata */}
+                <div className="flex justify-between items-center pt-5 mt-8 border-t border-[rgba(255,255,255,0.04)]">
+                  <span className="font-hud text-[8px] text-[rgba(255,255,255,0.2)]">RESPONSE TIME: &lt;24H</span>
+                  <span className="font-hud text-[8px] text-[rgba(255,255,255,0.2)]">FORM_V2.1</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -250,30 +299,36 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Brutalist Footer Bar */}
-      <motion.footer
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "50px" }}
-        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-        className="relative z-10 w-full bg-white border-t-2 border-black px-6 md:px-12 lg:px-24 py-8 text-black font-inter"
-      >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
-            <p style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888]">
-              VIBOOTHI © 2026
-            </p>
-            
+      {/* ── Brutalist Footer Bar ──────────────────────────── */}
+      <div className="relative z-20 w-full border-t border-[rgba(255,255,255,0.05)]">
+        {/* Decorative film-strip line */}
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.08)] to-transparent" />
+
+        <div className="px-8 md:px-16 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 max-w-[1400px] mx-auto">
             <div className="flex items-center gap-6">
-              <span style={{ fontFamily: "'JetBrains Mono', monospace" }} className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888] mr-2">
-                SYSTEM IDENTIFIER:
+              <span className="font-hud text-[9px] text-[rgba(255,255,255,0.25)]">
+                VIBOOTHI © 2026
               </span>
-              <div className="flex items-center gap-4">
-                 <Chip label="VIBE_001" />
-                 <Chip label="ONLINE" />
+              <span className="hidden md:inline font-hud text-[9px] text-[rgba(255,255,255,0.12)]">
+                //
+              </span>
+              <span className="hidden md:inline font-hud text-[9px] text-[rgba(255,255,255,0.2)]">
+                ALL RIGHTS RESERVED
+              </span>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <span className="font-hud text-[9px] text-[rgba(255,255,255,0.15)]">SYS_ID:</span>
+              <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)] border border-[rgba(255,255,255,0.06)] px-2 py-0.5">VIBE_001</span>
+              <div className="flex items-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-green-400 opacity-60" />
+                <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">ONLINE</span>
               </div>
             </div>
           </div>
-      </motion.footer>
+        </div>
+      </div>
     </section>
   );
 };

@@ -21,7 +21,9 @@ function App() {
     if (isLoading) return;
 
     const timer = setTimeout(() => {
-      let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia(mainRef);
+      
+      mm.add("(min-width: 768px)", () => {
         var panels = gsap.utils.toArray(".section");
 
         panels.forEach((panel) => {
@@ -31,16 +33,13 @@ function App() {
           let isHero = panel.querySelector('#hero') !== null;
           let isProjects = panel.classList.contains('projects-section');
           let isBioText = panel.classList.contains('bio-text-section');
-          let isHorizontalWrap = panel.classList.contains('horizontal-scroll-container');
           
-          // Only apply global pinning to Hero, Projects, BioText, and HorizontalWrap.
-          if (!isHero && !isProjects && !isBioText && !isHorizontalWrap) return;
+          if (!isHero && !isProjects && !isBioText) return;
           
           let windowHeight = window.innerHeight;
           let endScroll = `+=${windowHeight}`;
           if (isHero) endScroll = `+=${windowHeight * 2.5}`;
           else if (isProjects) endScroll = `+=${windowHeight * 3}`;
-          else if (isHorizontalWrap) endScroll = `+=${windowHeight * 1.5}`;
           
           let tl = gsap.timeline({
             scrollTrigger: {
@@ -57,44 +56,40 @@ function App() {
           if (isHero) {
             let zoomO = panel.querySelector('.zoom-o');
             
-            // Fade out everything else in the hero section
             let elementsToFade = Array.from(panel.querySelectorAll('h1 span, p, nav, .gradient-overlay'))
               .filter(el => !el.classList.contains('zoom-o'));
               
             tl.fromTo(elementsToFade, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2 }, 0);
             
-            // Scale the 'O' to zoom completely through it
             if (zoomO) {
               tl.fromTo(zoomO, { scale: 1 }, {
-                scale: 180, // Zoom until the 'O' completely disappears
+                scale: 180,
                 transformOrigin: "50% 50%",
-                duration: 1, // Stretch out the zoom over the scroll distance
+                duration: 1,
                 ease: "power2.in"
               }, 0.1);
             }
 
-            // Fade the background video to solid black ONLY when the 'O' hole covers the screen
             let fadeToBlack = panel.querySelector('.fade-to-black');
             if (fadeToBlack) {
               tl.to(fadeToBlack, {
                 opacity: 1,
-                duration: 0.2, // quick fade right at the end of the zoom
+                duration: 0.2,
                 ease: "none"
               }, 0.85);
             }
 
-            // Reveal the Vibe Coder section from INSIDE the 'O'
             let bioContainer = panel.querySelector('.bio-container');
             if (bioContainer) {
               let vibeLeft = bioContainer.querySelector('.vibe-reveal-left');
               let vibeRight = bioContainer.querySelector('.vibe-reveal-right');
               
-              tl.fromTo(bioContainer, { opacity: 0, scale: 0.9 }, {
+              tl.fromTo(bioContainer, { opacity: 0, scale: 0.95 }, {
                 opacity: 1,
                 scale: 1,
                 duration: 0.8,
                 ease: "power2.out"
-              }, 0.3); // Fade in container as hole gets big enough
+              }, 1.0); // Delayed to start AFTER the '0' zoom finishes (was 0.3)
               
               if (vibeLeft && vibeRight) {
                 tl.fromTo([vibeLeft, vibeRight], { opacity: 0, y: 40 }, {
@@ -103,42 +98,78 @@ function App() {
                   duration: 0.6,
                   stagger: 0.2,
                   ease: "power2.out"
-                }, 0.5);
+                }, 1.2);
               }
             }
-          } else if (isProjects) {
-            // Let it stay fully visible and pinned. The internal bento timeline handles the zoom.
-          } else if (isBioText) {
-            // Just pin it without any scale/fade animations so the next section natively scrolls over it.
-          } else if (isHorizontalWrap) {
-            tl.to(innerpanel, { xPercent: -50, ease: "none" });
           }
         });
+      });
 
-        ScrollTrigger.refresh();
-      }, mainRef);
+      // Mobile animations (simplified)
+      mm.add("(max-width: 767px)", () => {
+        let heroPanel = document.querySelector("#hero")?.closest(".section");
+        if (heroPanel) {
+          gsap.to(heroPanel.querySelector('.zoom-o'), {
+            scale: 80,
+            opacity: 0,
+            scrollTrigger: {
+              trigger: heroPanel,
+              start: "top top",
+              end: "+=100%",
+              scrub: true,
+              pin: true
+            }
+          });
+          gsap.fromTo(heroPanel.querySelector('.bio-container'), { opacity: 0 }, {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: heroPanel,
+              start: "70% top", // Delay appearance on mobile until '0' is mostly zoomed out
+              end: "+=100%",
+              scrub: true
+            }
+          });
+        }
+      });
 
-      return () => ctx.revert();
+      return () => mm.revert();
     }, 200);
 
     return () => clearTimeout(timer);
   }, [isLoading]);
 
+
   return (
     <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
-      <div style={{ width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-dark)' }}>
+      <div className="bg-radial-vignette" style={{ width: '100%', minHeight: '100vh', position: 'relative' }}>
+        
+        {/* Global Film Grain / Noise Overlay */}
+        <svg 
+          style={{
+            position: 'fixed',
+            inset: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: 9999,
+            opacity: 0.06,
+            pointerEvents: 'none'
+          }} 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+        </svg>
+
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
         <main ref={mainRef}>
           <section className="section"><div className="section-inner"><FolioHero /></div></section>
           <section className="section projects-section"><div className="section-inner"><LatestProjects /></div></section>
           <section className="section"><div className="section-inner"><CaseStudies /></div></section>
           <section className="section bio-text-section" style={{ position: 'relative', zIndex: 1 }}><div className="section-inner"><BioTextSection /></div></section>
-          <section className="section horizontal-scroll-container" style={{ position: 'relative', zIndex: 2, overflow: 'hidden' }}>
-            <div className="section-inner flex" style={{ width: '200vw', height: '100vh', willChange: 'transform' }}>
-              <div style={{ width: '100vw', height: '100vh', overflowY: 'auto', flexShrink: 0 }}><FAQSection /></div>
-              <div style={{ width: '100vw', height: '100vh', overflowY: 'auto', flexShrink: 0 }}><Footer /></div>
-            </div>
-          </section>
+          <section className="section" style={{ position: 'relative', zIndex: 2 }}><div className="section-inner"><FAQSection /></div></section>
+          <section className="section" style={{ position: 'relative', zIndex: 2 }}><div className="section-inner"><Footer /></div></section>
         </main>
       </div>
     </ReactLenis>
