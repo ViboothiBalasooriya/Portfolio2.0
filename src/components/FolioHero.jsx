@@ -333,7 +333,7 @@ const FolioHero = () => {
             alignItems: 'flex-end', // Aligned content right
             textAlign: 'right', // Aligned text right
             maxWidth: '800px',
-            marginTop: '68vh', // Moved further down again
+            marginTop: '66vh', // Moved slightly up again
             paddingRight: '5%', // Padding on the right instead of left
           }}
         >
