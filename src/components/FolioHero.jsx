@@ -306,27 +306,7 @@ const FolioHero = () => {
 
 
 
-      {/* Scroll to Explore Button */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 3, ease: 'easeOut' }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
-        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-      >
-        <span className="text-white text-xs font-mono tracking-widest uppercase opacity-70 hover:opacity-100 transition-opacity">
-          Scroll to explore
-        </span>
-        <motion.div 
-          className="w-[1px] h-12 bg-white/30 relative overflow-hidden"
-        >
-          <motion.div 
-            className="w-full h-1/2 bg-white absolute top-0"
-            animate={{ y: [-24, 48] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-          />
-        </motion.div>
-      </motion.div>
+
 
       {/* Hero Content */}
       <div
@@ -412,7 +392,7 @@ const FolioHero = () => {
           <p
             style={{
               fontFamily: 'monospace, var(--font-inter)',
-              fontSize: 'clamp(11px, 1vw, 13px)',
+              fontSize: 'clamp(12px, 1.2vw, 15px)',
               fontWeight: 400,
               color: '#ffffff',
               lineHeight: 1.6,
@@ -423,6 +403,28 @@ const FolioHero = () => {
           >
             {scrambledDescription || '\u00A0'}
           </p>
+
+          {/* Scroll to Explore Button (Moved under description) */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 3, ease: 'easeOut' }}
+            className="flex flex-col items-end gap-2 cursor-pointer mt-4"
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          >
+            <span className="text-white text-xs font-mono tracking-widest uppercase opacity-70 hover:opacity-100 transition-opacity">
+              Scroll to explore
+            </span>
+            <motion.div 
+              className="w-[1px] h-10 bg-white/30 relative overflow-hidden mr-12"
+            >
+              <motion.div 
+                className="w-full h-1/2 bg-white absolute top-0"
+                animate={{ y: [-20, 40] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+              />
+            </motion.div>
+          </motion.div>
 
         </motion.div>
       </div>
