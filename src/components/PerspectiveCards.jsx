@@ -30,6 +30,15 @@ const PerspectiveCards = () => {
       wordClass: 'word' // Applies dashed border and gradient from index.css
     });
 
+    // Remove dashed border from the '//' sign
+    if (splitText.words) {
+      splitText.words.forEach(word => {
+        if (word.textContent.includes('//')) {
+          word.style.border = 'none';
+        }
+      });
+    }
+
     // Create a master timeline
     const tl = gsap.timeline({
       scrollTrigger: {

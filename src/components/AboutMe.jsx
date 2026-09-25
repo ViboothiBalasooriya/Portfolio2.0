@@ -8,6 +8,18 @@ const AboutMe = () => {
       className="relative min-h-screen w-full flex flex-col md:flex-row overflow-hidden bg-[#0a0a0a] text-[#e0e0e0]"
       style={{ fontFamily: "'JetBrains Mono', monospace" }}
     >
+      {/* ── Signature Image with Red Blend Hack (z-30 Overlay) ─────────────── */}
+      <div 
+        className="absolute -bottom-[5%] md:-bottom-[10%] -left-[40%] md:-left-[25%] pointer-events-none select-none z-30"
+        style={{ 
+          mixBlendMode: 'screen',
+          transform: 'rotate(-12deg)',
+          width: 'clamp(800px, 80vw, 1800px)'
+        }}
+      >
+        <img src="/assets/signature.jpg" alt="Viboothi Signature" style={{ width: '100%', display: 'block' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#FF0000', mixBlendMode: 'multiply' }} />
+      </div>
       
       {/* ── Massive Thin Background Text (Global z-10) ──────────────── */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-10">
@@ -15,7 +27,7 @@ const AboutMe = () => {
           className="text-white opacity-[0.04] whitespace-nowrap"
           style={{ 
             fontFamily: 'var(--font-inter)', 
-            fontWeight: 100, // Thin font as requested
+            fontWeight: 700, // Made bolder as requested
             fontSize: 'clamp(150px, 25vw, 400px)',
             letterSpacing: '-0.05em',
             userSelect: 'none'

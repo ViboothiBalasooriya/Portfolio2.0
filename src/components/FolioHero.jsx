@@ -135,9 +135,7 @@ const FolioHero = () => {
   const [textIndex, setTextIndex] = useState(0);
 
   const phrases = [
-    "HI, I'M VIBOOTHI",
-    "I'M A DEVELOPER",
-    "I'M A DESIGNER"
+    "HI, I'M VIBOOTHI"
   ];
 
   // Detect scroll to lock the text
@@ -150,7 +148,7 @@ const FolioHero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Looping typewriter effect
+  // One-time typewriter effect
   useEffect(() => {
     let isMounted = true;
     let timeoutId;
@@ -159,42 +157,8 @@ const FolioHero = () => {
       // Initial delay for the very first type-out
       await new Promise(r => { timeoutId = setTimeout(r, 2200); });
       
-      while (isMounted) {
-        if (hasScrolled) break;
-        
+      if (isMounted) {
         await controls.start("visible");
-        
-        // Wait 3 seconds
-        let waited = 0;
-        while (waited < 3000) {
-          if (hasScrolled) break;
-          await new Promise(r => { timeoutId = setTimeout(r, 100); });
-          waited += 100;
-        }
-        
-        if (hasScrolled) break;
-        
-        // Delete backwards
-        await controls.start("hidden");
-        
-        // Wait 0.5s before typing again
-        waited = 0;
-        while (waited < 500) {
-          if (hasScrolled) break;
-          await new Promise(r => { timeoutId = setTimeout(r, 100); });
-          waited += 100;
-        }
-
-        if (isMounted && !hasScrolled) {
-          setTextIndex(prev => (prev + 1) % phrases.length);
-          // Wait for React to re-render the new text in the DOM before animating to visible
-          await new Promise(r => { timeoutId = setTimeout(r, 100); });
-        }
-      }
-      
-      if (isMounted && hasScrolled) {
-        setTextIndex(0); // Force back to initial text for GSAP 'zoom-o' compatibility
-        controls.set("visible");
       }
     };
     
@@ -204,7 +168,7 @@ const FolioHero = () => {
       isMounted = false;
       clearTimeout(timeoutId);
     };
-  }, [controls, hasScrolled]);
+  }, [controls]);
 
   return (
     <section
@@ -234,6 +198,7 @@ const FolioHero = () => {
           objectFit: 'cover',
           opacity: 0,
           zIndex: 1,
+          mixBlendMode: 'screen',
           filter: 'blur(1px) brightness(0.9) contrast(1.1)', // Decreased blur further
           transform: 'scale(1.01)', // Adjusted scale for minimal blur
         }}
@@ -281,6 +246,20 @@ const FolioHero = () => {
           <AboutMe />
         </div>
       </div>
+
+      {/* ── Signature Image 2 "portfolio" (z-0 Overlay, Behind character) ─────────────── */}
+      <div 
+        className="absolute top-[20%] md:top-[25%] -right-[5%] md:-right-[10%] z-[0] pointer-events-none select-none"
+        style={{
+          mixBlendMode: 'screen',
+          transform: 'rotate(12deg)',
+          width: 'clamp(800px, 80vw, 1800px)'
+        }}
+      >
+        <img src="/assets/portfolio-sign.jpg" alt="Portfolio Signature" style={{ width: '100%', display: 'block' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#FF0000', mixBlendMode: 'multiply' }} />
+      </div>
+
       {/* Navbar */}
       <nav
         style={{
