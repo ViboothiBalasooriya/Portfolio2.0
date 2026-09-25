@@ -47,7 +47,7 @@ const ContactSection = () => {
       <div style={{ position: 'relative', zIndex: 60, width: '100%', padding: '0 5vw' }}>
         <h2 style={{
           fontFamily: 'var(--font-inter)',
-          fontSize: 'clamp(30px, 7vw, 140px)',
+          fontSize: 'clamp(20px, 5vw, 90px)',
           fontWeight: 900,
           letterSpacing: '-0.05em',
           lineHeight: 0.9,

@@ -220,7 +220,7 @@ const FAQSection = () => {
                 style={{ 
                   fontFamily: "'Syne', sans-serif", 
                   fontWeight: 800, 
-                  fontSize: 'clamp(65px, 19vw, 300px)',
+                  fontSize: 'clamp(45px, 13vw, 200px)',
                   color: '#FF0000',
                   lineHeight: 0.8,
                   letterSpacing: '-0.04em',
@@ -241,7 +241,7 @@ const FAQSection = () => {
 
               <h2
                 style={{ fontFamily: 'var(--font-inter)' }}
-                className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
+                className="text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase leading-[0.9] tracking-tight text-white drop-shadow-lg"
               >
                 HAVE <br className="hidden lg:block" />
                 QUESTIONS?
@@ -249,7 +249,7 @@ const FAQSection = () => {
               <div className="relative inline-block mt-2">
                 <h2
                   style={{ fontFamily: 'var(--font-inter)' }}
-                  className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ffffff]"
+                  className="text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase leading-[0.9] tracking-tight text-[#ffffff]"
                 >
                   I HAVE <br className="hidden lg:block" />
                   ANSWERS.

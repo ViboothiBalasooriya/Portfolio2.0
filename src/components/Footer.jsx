@@ -91,7 +91,7 @@ const Footer = () => {
           style={{ 
             fontFamily: "'Syne', sans-serif", 
             fontWeight: 800, 
-            fontSize: 'clamp(65px, 17vw, 280px)',
+            fontSize: 'clamp(45px, 12vw, 200px)',
             color: '#FF0000',
             lineHeight: 0.8,
             letterSpacing: '-0.04em',
@@ -147,7 +147,7 @@ const Footer = () => {
 
               <h2
                 style={{ fontFamily: "'Syne', sans-serif" }}
-                className="text-4xl md:text-5xl lg:text-[4rem] font-extrabold uppercase leading-[0.85] tracking-tight text-white"
+                className="text-3xl md:text-4xl lg:text-[3rem] font-extrabold uppercase leading-[0.85] tracking-tight text-white"
               >
                 LET'S <br />
                 TALK.
