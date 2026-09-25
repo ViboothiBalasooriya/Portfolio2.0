@@ -325,6 +325,30 @@ const FolioHero = () => {
         </div>
       </nav>
 
+
+
+      {/* Scroll to Explore Button */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 3, ease: 'easeOut' }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+      >
+        <span className="text-white text-xs font-mono tracking-widest uppercase opacity-70 hover:opacity-100 transition-opacity">
+          Scroll to explore
+        </span>
+        <motion.div 
+          className="w-[1px] h-12 bg-white/30 relative overflow-hidden"
+        >
+          <motion.div 
+            className="w-full h-1/2 bg-white absolute top-0"
+            animate={{ y: [-24, 48] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+          />
+        </motion.div>
+      </motion.div>
+
       {/* Hero Content */}
       <div
         style={{
@@ -334,7 +358,7 @@ const FolioHero = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-end', // Moved to right
+          alignItems: 'flex-end', // Aligned content right
           justifyContent: 'center',
           padding: '0 var(--side-padding)',
         }}
@@ -348,7 +372,6 @@ const FolioHero = () => {
             flexDirection: 'column',
             alignItems: 'flex-end', // Aligned content right
             textAlign: 'right', // Aligned text right
-            width: '100%',
             maxWidth: '1200px',
             marginTop: '55vh', // Moved further down again
             paddingRight: '5%', // Padding on the right instead of left

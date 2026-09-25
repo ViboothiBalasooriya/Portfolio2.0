@@ -85,6 +85,23 @@ const Footer = () => {
   return (
     <section id="contact" className="relative w-full overflow-hidden flex flex-col bg-transparent" style={{ minHeight: '100vh' }}>
 
+      {/* ── Massive Red Section Heading ("contact") (z-0 Overlay, Cut off) ─────────────── */}
+      <div className="absolute top-[10%] md:top-[20%] -right-[15%] md:-right-[10%] z-0 pointer-events-none select-none">
+        <h2 
+          style={{ 
+            fontFamily: "'Syne', sans-serif", 
+            fontWeight: 800, 
+            fontSize: 'clamp(100px, 25vw, 400px)',
+            color: '#FF0000',
+            lineHeight: 0.8,
+            letterSpacing: '-0.04em',
+            opacity: 0.4
+          }}
+        >
+          contact
+        </h2>
+      </div>
+
       {/* Atmospheric glow - very subtle */}
       <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-white rounded-full blur-[200px] opacity-[0.015] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-white rounded-full blur-[180px] opacity-[0.02] pointer-events-none" />

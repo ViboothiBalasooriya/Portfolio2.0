@@ -172,7 +172,7 @@ const FAQSection = () => {
 
   return (
     <section id="faq-specs" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-transparent" style={{ padding: '8vw 0' }}>
-
+      
       {/* Scanline texture */}
       <div
         aria-hidden
@@ -204,7 +204,7 @@ const FAQSection = () => {
       {/* ── content wrapper ────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
         
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-24 w-full">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-24 w-full mt-10">
 
           {/* LEFT COLUMN — heading ────────────────────────────── */}
           <motion.div
@@ -212,9 +212,26 @@ const FAQSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col lg:w-1/2 z-20"
+            className="flex flex-col lg:w-1/2 z-20 relative"
           >
-            <div className="mb-6 relative">
+            {/* ── Massive Red Section Heading ("faq") (z-50 Overlay, Cut off) ─────────────── */}
+            <div className="absolute -top-[20%] md:-top-[10%] -left-[15%] md:-left-[10%] z-50 pointer-events-none select-none">
+              <h2 
+                style={{ 
+                  fontFamily: "'Syne', sans-serif", 
+                  fontWeight: 800, 
+                  fontSize: 'clamp(100px, 28vw, 450px)',
+                  color: '#FF0000',
+                  lineHeight: 0.8,
+                  letterSpacing: '-0.04em',
+                  opacity: 0.4
+                }}
+              >
+                faq
+              </h2>
+            </div>
+
+            <div className="mb-6 relative mt-16 md:mt-24 z-60">
               {/* Decorative line */}
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-8 h-[1px] bg-[rgba(255,255,255,0.15)]" />

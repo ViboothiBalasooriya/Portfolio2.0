@@ -33,6 +33,8 @@ const ContactSection = () => {
     <section
       id="contact"
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         width: '100%',
         backgroundColor: '#ffffff',
         padding: '15vh 0 5vh',
@@ -42,7 +44,7 @@ const ContactSection = () => {
         justifyContent: 'space-between',
       }}
     >
-      <div style={{ width: '100%', padding: '0 5vw' }}>
+      <div style={{ position: 'relative', zIndex: 60, width: '100%', padding: '0 5vw' }}>
         <h2 style={{
           fontFamily: 'var(--font-inter)',
           fontSize: 'clamp(40px, 10vw, 200px)',

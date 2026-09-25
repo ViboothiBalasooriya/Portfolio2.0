@@ -214,7 +214,25 @@ const CaseStudies = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="projects-list" className="relative w-full pt-[15vh] pb-10" style={{ minHeight: '100vh', backgroundColor: 'transparent' }}>
+    <section ref={sectionRef} id="projects-list" className="relative w-full pt-[15vh] pb-10 overflow-hidden" style={{ minHeight: '100vh', backgroundColor: 'transparent' }}>
+      
+      {/* ── Massive Red Section Heading ("projects") (z-0 Overlay, Cut off) ─────────────── */}
+      <div className="absolute top-[30%] left-1/2 -translate-x-1/2 z-0 pointer-events-none select-none">
+        <h2 
+          style={{ 
+            fontFamily: "'Syne', sans-serif", 
+            fontWeight: 800, 
+            fontSize: 'clamp(150px, 30vw, 550px)',
+            color: '#FF0000',
+            lineHeight: 0.8,
+            letterSpacing: '-0.04em',
+            opacity: 0.4,
+            whiteSpace: 'nowrap'
+          }}
+        >
+          projects
+        </h2>
+      </div>
       <style>
         {`
           @keyframes marqueeProjects {
@@ -231,7 +249,7 @@ const CaseStudies = () => {
       </style>
 
       {/* Header Area */}
-      <div className="relative px-6 pb-10 pt-32 sm:px-10 lg:px-16 lg:pt-40" style={{ maxWidth: '1240px', margin: '0 auto', marginBottom: '8vh', paddingTop: '10vh' }}>
+      <div className="relative px-6 pb-10 pt-32 sm:px-10 lg:px-16 lg:pt-40 z-20" style={{ maxWidth: '1240px', margin: '0 auto', marginBottom: '8vh', paddingTop: '10vh' }}>
         
         <motion.div 
           ref={headerRef}
@@ -259,7 +277,7 @@ const CaseStudies = () => {
       </div>
 
       {/* Case Study Cards */}
-      <div className="mx-auto max-w-7xl px-6 pb-16 sm:px-10 lg:px-16" style={{ maxWidth: '1240px', margin: '0 auto', width: '100%' }}>
+      <div className="mx-auto max-w-7xl px-6 pb-16 sm:px-10 lg:px-16 relative z-20" style={{ maxWidth: '1240px', margin: '0 auto', width: '100%' }}>
         <div className="grid gap-4 md:grid-cols-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '24px' }}>
           {projects.map((proj, i) => (
             <ProjectCard key={proj.id} project={proj} index={i} />

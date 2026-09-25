@@ -112,8 +112,9 @@ const ProjectsBentoGallery = () => {
   }, [selectedProject]);
 
   return (
-    <div ref={containerRef} className="projects-gallery-container" style={{ position: 'relative', zIndex: 20, backgroundColor: 'var(--bg-dark)' }}>
-      <div className="gallery-wrap">
+    <div ref={containerRef} className="projects-gallery-container relative" style={{ zIndex: 20, backgroundColor: 'var(--bg-dark)' }}>
+
+      <div className="gallery-wrap relative z-60">
         <div className="gallery gallery--bento gallery--switch" ref={galleryRef}>
           {projects.map((proj) => (
             <div 
