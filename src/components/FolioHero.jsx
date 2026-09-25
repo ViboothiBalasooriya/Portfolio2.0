@@ -249,7 +249,7 @@ const FolioHero = () => {
 
       {/* ── Signature Image 2 "portfolio" (z-0 Overlay, Behind character) ─────────────── */}
       <div 
-        className="absolute top-[30%] md:top-[35%] right-0 md:right-[2%] z-[0] pointer-events-none select-none"
+        className="absolute top-[35%] md:top-[40%] right-[2%] md:right-[5%] z-[0] pointer-events-none select-none"
         style={{
           mixBlendMode: 'screen',
           transform: 'rotate(12deg)',
@@ -353,7 +353,7 @@ const FolioHero = () => {
             textAlign: 'right', // Aligned text right
             maxWidth: '800px',
             marginTop: '65vh', // Moved further down again
-            paddingRight: '8%', // Padding on the right instead of left
+            paddingRight: '5%', // Padding on the right instead of left
           }}
         >
           {/* Main Name - Typewriter Effect */}
