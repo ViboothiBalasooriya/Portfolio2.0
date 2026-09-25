@@ -154,7 +154,7 @@ const PerspectiveCards = () => {
                 style={{
                   fontFamily: 'var(--font-inter)',
                   fontWeight: 900,
-                  fontSize: 'clamp(40px, 8vw, 150px)',
+                  fontSize: 'clamp(28px, 5.5vw, 100px)',
                   letterSpacing: '-0.03em',
                   textTransform: 'uppercase',
                   margin: 0,

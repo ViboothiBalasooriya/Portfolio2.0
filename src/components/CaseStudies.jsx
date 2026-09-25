@@ -222,7 +222,7 @@ const CaseStudies = () => {
           style={{ 
             fontFamily: "'Syne', sans-serif", 
             fontWeight: 800, 
-            fontSize: 'clamp(150px, 30vw, 550px)',
+            fontSize: 'clamp(100px, 20vw, 380px)',
             color: '#FF0000',
             lineHeight: 0.8,
             letterSpacing: '-0.04em',
@@ -261,7 +261,7 @@ const CaseStudies = () => {
         >
           <h2 style={{
             fontFamily: 'var(--font-inter)',
-            fontSize: 'clamp(30px, 5vw, 60px)',
+            fontSize: 'clamp(20px, 3.5vw, 42px)',
             fontWeight: 900,
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
@@ -305,11 +305,11 @@ const CaseStudies = () => {
             
             {/* Left Column: Text & CTA */}
             <div className="py-16 lg:py-48 pointer-events-auto" style={{ maxWidth: '48rem', paddingLeft: '250px' }}>
-              <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(32px, 6vw, 64px)', textTransform: 'uppercase', color: '#ffffff', marginBottom: '24px', lineHeight: 1 }}>LET'S WORK TOGETHER</h3>
-              <p className="font-hud" style={{ fontSize: '14px', lineHeight: 1.6, textTransform: 'uppercase' }}>
+              <h3 style={{ fontFamily: 'var(--font-inter)', fontWeight: 900, fontSize: 'clamp(22px, 4.5vw, 45px)', textTransform: 'uppercase', color: '#ffffff', marginBottom: '24px', lineHeight: 1 }}>LET'S WORK TOGETHER</h3>
+              <p className="font-hud" style={{ fontSize: '12px', lineHeight: 1.6, textTransform: 'uppercase' }}>
                 I partner with ambitious brands that are ready to move beyond fragmented visuals and shallow quick fixes.
               </p>
-              <button className="group mt-20 flex items-center justify-center border-brutalist bg-transparent text-[#ffffff] hover:bg-white hover:text-black transition-colors" style={{ padding: '24px 40px', fontFamily: 'var(--font-inter)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '20px', lineHeight: 1 }}>
+              <button className="group mt-20 flex items-center justify-center border-brutalist bg-transparent text-[#ffffff] hover:bg-white hover:text-black transition-colors" style={{ padding: '16px 28px', fontFamily: 'var(--font-inter)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', fontSize: '16px', lineHeight: 1 }}>
                 <span style={{ transform: 'translateY(2px)' }}>START A PROJECT</span>
                 <div className="ml-4 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-2">
                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

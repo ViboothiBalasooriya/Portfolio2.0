@@ -14,7 +14,7 @@ const AboutMe = () => {
         style={{ 
           mixBlendMode: 'screen',
           transform: 'rotate(-12deg)',
-          width: 'clamp(800px, 80vw, 1800px)'
+          width: 'clamp(550px, 55vw, 1200px)'
         }}
       >
         <img src="/assets/signature.jpg" alt="Viboothi Signature" style={{ width: '100%', display: 'block' }} />
@@ -28,7 +28,7 @@ const AboutMe = () => {
           style={{ 
             fontFamily: 'var(--font-inter)', 
             fontWeight: 700, // Made bolder as requested
-            fontSize: 'clamp(150px, 25vw, 400px)',
+            fontSize: 'clamp(100px, 17vw, 280px)',
             letterSpacing: '-0.05em',
             userSelect: 'none'
           }}
@@ -75,7 +75,7 @@ const AboutMe = () => {
 
         {/* Paragraph Text Content (Global z-60) */}
         <div className="w-full max-w-2xl z-60 relative flex flex-col gap-6">
-          <div className="text-lg md:text-[1.35rem] leading-[1.8] tracking-tight text-justify text-[#d4d4d4]">
+          <div className="text-base md:text-lg leading-[1.8] tracking-tight text-justify text-[#d4d4d4]">
             After motion comes a pause - not rest, but recovery. The shoulders still hold the shape of effort, even as the gaze settles. This isn't nothing as absence. It's nothing as everything unnecessary, removed.
           </div>
         </div>
@@ -88,7 +88,7 @@ const AboutMe = () => {
           style={{ 
             fontFamily: "'Syne', sans-serif", 
             fontWeight: 800, 
-            fontSize: 'clamp(100px, 25vw, 400px)',
+            fontSize: 'clamp(70px, 17vw, 280px)',
             color: '#FF0000',
             lineHeight: 0.8,
             letterSpacing: '-0.04em',

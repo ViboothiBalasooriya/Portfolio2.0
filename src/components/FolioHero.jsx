@@ -253,7 +253,7 @@ const FolioHero = () => {
         style={{
           mixBlendMode: 'screen',
           transform: 'rotate(12deg)',
-          width: 'clamp(800px, 80vw, 1800px)'
+          width: 'clamp(550px, 55vw, 1200px)'
         }}
       >
         <img src="/assets/portfolio-sign.jpg" alt="Portfolio Signature" style={{ width: '100%', display: 'block' }} />
@@ -371,7 +371,7 @@ const FolioHero = () => {
             style={{
               fontFamily: 'var(--font-inter)',
               fontWeight: 900,
-              fontSize: 'clamp(32px, 7vw, 120px)',
+              fontSize: 'clamp(22px, 5vw, 85px)',
               letterSpacing: '-0.02em',
               lineHeight: 1,
               color: '#ffffff',
@@ -399,8 +399,8 @@ const FolioHero = () => {
               transition={{ repeat: Infinity, repeatType: 'reverse', duration: 0.5, delay: 2.2 }}
               style={{
                 display: 'inline-block',
-                width: 'clamp(4px, 1vw, 12px)',
-                height: 'clamp(24px, 5.5vw, 90px)',
+                width: 'clamp(3px, 0.7vw, 8px)',
+                height: 'clamp(16px, 3.8vw, 62px)',
                 backgroundColor: '#ffffff',
                 marginLeft: '8px',
                 verticalAlign: 'text-bottom',
@@ -412,7 +412,7 @@ const FolioHero = () => {
           <p
             style={{
               fontFamily: 'monospace, var(--font-inter)',
-              fontSize: 'clamp(14px, 1.5vw, 18px)',
+              fontSize: 'clamp(11px, 1.1vw, 14px)',
               fontWeight: 400,
               color: '#ffffff',
               lineHeight: 1.6,
