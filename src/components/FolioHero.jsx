@@ -327,13 +327,14 @@ const FolioHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-[50vh] md:mt-[0]"
           style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end', // Aligned content right
             textAlign: 'right', // Aligned text right
             maxWidth: '800px',
-            marginTop: '66vh', // Moved slightly up again
+            marginTop: 'clamp(50vh, 66vh, 66vh)', // Adjusted for responsiveness
             paddingRight: '5%', // Padding on the right instead of left
           }}
         >
