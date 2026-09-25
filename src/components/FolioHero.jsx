@@ -355,7 +355,7 @@ const FolioHero = () => {
               letterSpacing: '-0.02em',
               lineHeight: 1,
               color: '#ffffff',
-              margin: '0 0 40px 0',
+              margin: '0 0 15px 0',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}
