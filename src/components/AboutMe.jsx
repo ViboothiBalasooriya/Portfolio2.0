@@ -10,11 +10,11 @@ const AboutMe = () => {
     >
       {/* ── Signature Image with Red Blend Hack (z-30 Overlay) ─────────────── */}
       <div 
-        className="absolute -bottom-[5%] md:bottom-[5%] -left-[10%] md:left-[10%] pointer-events-none select-none z-30"
+        className="absolute -bottom-[5%] md:bottom-[5%] -left-[5%] md:left-[2%] pointer-events-none select-none z-30"
         style={{ 
           mixBlendMode: 'screen',
           transform: 'rotate(-12deg)',
-          width: 'clamp(400px, 40vw, 900px)'
+          width: 'clamp(250px, 25vw, 600px)'
         }}
       >
         <img src="/assets/signature.jpg" alt="Viboothi Signature" style={{ width: '100%', display: 'block' }} />
