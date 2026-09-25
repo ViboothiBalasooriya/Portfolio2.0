@@ -249,7 +249,7 @@ const FolioHero = () => {
 
       {/* ── Signature Image 2 "portfolio" (z-0 Overlay, Behind character) ─────────────── */}
       <div 
-        className="absolute top-[40%] md:top-[45%] right-0 md:right-[2%] z-[0] pointer-events-none select-none"
+        className="absolute top-[30%] md:top-[35%] -right-[5%] md:-right-[8%] z-[0] pointer-events-none select-none"
         style={{
           mixBlendMode: 'screen',
           transform: 'rotate(12deg)',
