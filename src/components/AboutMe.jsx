@@ -14,7 +14,8 @@ const AboutMe = () => {
         style={{ 
           mixBlendMode: 'screen',
           transform: 'rotate(-12deg)',
-          width: 'clamp(250px, 25vw, 600px)'
+          width: 'clamp(250px, 25vw, 600px)',
+          clipPath: 'inset(2px)'
         }}
       >
         <img src="/assets/signature.jpg" alt="Viboothi Signature" style={{ width: '100%', display: 'block' }} />

@@ -253,7 +253,8 @@ const FolioHero = () => {
         style={{
           mixBlendMode: 'screen',
           transform: 'rotate(12deg)',
-          width: 'clamp(536px, 53vw, 1200px)'
+          width: 'clamp(536px, 53vw, 1200px)',
+          clipPath: 'inset(2px)'
         }}
       >
         <img src="/assets/portfolio-sign.jpg" alt="Portfolio Signature" style={{ width: '100%', display: 'block' }} />
