@@ -137,7 +137,7 @@ const ProjectsBentoGallery = () => {
                     fontFamily: 'var(--font-inter)', 
                     fontWeight: 700, 
                     color: '#ffffff', 
-                    fontSize: 'clamp(16px, 2.5vw, 32px)', 
+                    fontSize: 'clamp(12px, 1.5vw, 20px)', 
                     textTransform: 'uppercase', 
                     textAlign: 'center', 
                     lineHeight: 1,
