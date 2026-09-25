@@ -199,7 +199,7 @@ const FolioHero = () => {
           opacity: 0,
           zIndex: 1,
           mixBlendMode: 'screen',
-          filter: 'blur(1px) brightness(0.9) contrast(1.1)', // Decreased blur further
+          filter: 'blur(0px) brightness(0.9) contrast(1.1)', // No blur
           transform: 'scale(1.01)', // Adjusted scale for minimal blur
         }}
       />
@@ -249,11 +249,11 @@ const FolioHero = () => {
 
       {/* ── Signature Image 2 "portfolio" (z-0 Overlay, Behind character) ─────────────── */}
       <div 
-        className="absolute top-[20%] md:top-[25%] -right-[5%] md:-right-[10%] z-[0] pointer-events-none select-none"
+        className="absolute top-[40%] md:top-[45%] right-0 md:right-[2%] z-[0] pointer-events-none select-none"
         style={{
           mixBlendMode: 'screen',
           transform: 'rotate(12deg)',
-          width: 'clamp(400px, 40vw, 900px)'
+          width: 'clamp(536px, 53vw, 1200px)'
         }}
       >
         <img src="/assets/portfolio-sign.jpg" alt="Portfolio Signature" style={{ width: '100%', display: 'block' }} />
@@ -351,9 +351,9 @@ const FolioHero = () => {
             flexDirection: 'column',
             alignItems: 'flex-end', // Aligned content right
             textAlign: 'right', // Aligned text right
-            maxWidth: '1200px',
+            maxWidth: '800px',
             marginTop: '55vh', // Moved further down again
-            paddingRight: '5%', // Padding on the right instead of left
+            paddingRight: '8%', // Padding on the right instead of left
           }}
         >
           {/* Main Name - Typewriter Effect */}
@@ -371,7 +371,7 @@ const FolioHero = () => {
             style={{
               fontFamily: 'var(--font-inter)',
               fontWeight: 900,
-              fontSize: 'clamp(16px, 3.5vw, 60px)',
+              fontSize: 'clamp(21px, 4.7vw, 80px)',
               letterSpacing: '-0.02em',
               lineHeight: 1,
               color: '#ffffff',
@@ -399,8 +399,8 @@ const FolioHero = () => {
               transition={{ repeat: Infinity, repeatType: 'reverse', duration: 0.5, delay: 2.2 }}
               style={{
                 display: 'inline-block',
-                width: 'clamp(2px, 0.5vw, 6px)',
-                height: 'clamp(12px, 2.8vw, 45px)',
+                width: 'clamp(3px, 0.6vw, 8px)',
+                height: 'clamp(16px, 3.7vw, 60px)',
                 backgroundColor: '#ffffff',
                 marginLeft: '8px',
                 verticalAlign: 'text-bottom',
@@ -412,7 +412,7 @@ const FolioHero = () => {
           <p
             style={{
               fontFamily: 'monospace, var(--font-inter)',
-              fontSize: 'clamp(10px, 0.8vw, 12px)',
+              fontSize: 'clamp(11px, 1vw, 13px)',
               fontWeight: 400,
               color: '#ffffff',
               lineHeight: 1.6,
