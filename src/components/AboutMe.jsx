@@ -10,7 +10,7 @@ const AboutMe = () => {
     >
       {/* ── Signature Image with Red Blend Hack (z-30 Overlay) ─────────────── */}
       <div 
-        className="absolute -bottom-[5%] md:bottom-[5%] -left-[10%] md:left-[15%] pointer-events-none select-none z-30"
+        className="absolute -bottom-[5%] md:bottom-[5%] -left-[10%] md:left-[10%] pointer-events-none select-none z-30"
         style={{ 
           mixBlendMode: 'screen',
           transform: 'rotate(-12deg)',
