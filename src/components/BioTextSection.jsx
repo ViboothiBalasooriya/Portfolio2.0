@@ -31,7 +31,7 @@ const BioTextSection = () => {
         whileInView="show"
         viewport={{ once: true, margin: '-100px' }}
         style={{
-          maxWidth: '1200px',
+          maxWidth: '850px', // Reduced from 1200px to bring it more to the center
           width: '100%',
           padding: '0 24px',
           textAlign: 'center',
@@ -51,7 +51,7 @@ const BioTextSection = () => {
               color: '#000000',
               fontFamily: 'var(--font-inter)',
               fontWeight: 900,
-              fontSize: 'clamp(24px, 4vw, 75px)',
+              fontSize: 'clamp(18px, 3.5vw, 55px)', // Reduced from clamp(24px, 4vw, 75px)
               letterSpacing: '-0.03em',
               padding: '0 0.2em',
               margin: '0.05em',
