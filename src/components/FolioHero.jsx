@@ -317,9 +317,10 @@ const FolioHero = () => {
         transition={{ duration: 1.2, delay: 1, ease: 'easeOut' }}
         className="absolute z-[4] pointer-events-none"
         style={{ 
-          width: 'clamp(120px, 20vw, 350px)',
-          bottom: 'clamp(2rem, 10vh, 4rem)',
-          left: 'calc(var(--side-padding) + 5%)'
+          width: 'clamp(300px, 45vw, 800px)',
+          bottom: 'clamp(2rem, 5vh, 4rem)',
+          left: 'clamp(-150px, -22vw, -400px)',
+          mixBlendMode: 'screen'
         }}
       >
         <img src={groupOverlay} alt="Group overlay" className="w-full h-auto" />
