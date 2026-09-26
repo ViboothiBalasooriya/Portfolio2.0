@@ -32,9 +32,8 @@ function App() {
           
           let isHero = panel.querySelector('#hero') !== null;
           let isProjects = panel.classList.contains('projects-section');
-          let isBioText = panel.classList.contains('bio-text-section');
           
-          if (!isHero && !isProjects && !isBioText) return;
+          if (!isHero && !isProjects) return;
           
           let windowHeight = window.innerHeight;
           let endScroll = `+=${windowHeight}`;
@@ -46,7 +45,7 @@ function App() {
               trigger: panel,
               start: "top top",
               end: endScroll,
-              pinSpacing: isBioText ? false : true,
+              pinSpacing: true,
               pin: true,
               scrub: true,
               invalidateOnRefresh: true
