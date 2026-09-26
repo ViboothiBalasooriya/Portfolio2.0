@@ -202,9 +202,9 @@ const FAQSection = () => {
       </div>
 
       {/* ── content wrapper ────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6 md:px-12 lg:px-24">
         
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-24 w-full mt-10">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-12 w-full mt-10">
 
           {/* LEFT COLUMN — heading ────────────────────────────── */}
           <motion.div
