@@ -127,7 +127,7 @@ const Footer = () => {
 
       {/* ── Main content ──────────────────────────────────── */}
       <div className="relative z-20 w-full flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-16 lg:gap-20 w-full max-w-[1400px] mx-auto">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-12 w-full max-w-[1100px] mx-auto">
 
           {/* LEFT COLUMN — Heading & Direct Contact */}
           <motion.div
