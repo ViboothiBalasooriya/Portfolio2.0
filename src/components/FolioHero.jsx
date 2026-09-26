@@ -312,30 +312,6 @@ const FolioHero = () => {
 
 
 
-      {/* Overlay Image Copy (White, Flipped, Underneath) */}
-      <motion.div 
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, delay: 1.1, ease: 'easeOut' }}
-        className="absolute z-[3] pointer-events-none"
-        style={{ 
-          width: 'clamp(400px, 60vw, 1000px)',
-          bottom: '-10%', // Positioned slightly lower ("yatin")
-          left: 'clamp(-200px, -28vw, -500px)',
-          mixBlendMode: 'screen'
-        }}
-      >
-        <img 
-          src={groupOverlay} 
-          alt="Group overlay white flipped" 
-          className="w-full h-auto opacity-30" 
-          style={{
-            filter: 'grayscale(100%) brightness(400%)',
-            transform: 'scaleX(-1)'
-          }}
-        />
-      </motion.div>
-
       {/* Overlay Image (Bottom Left) */}
       <motion.div 
         initial={{ opacity: 0, x: -30 }}
@@ -344,8 +320,8 @@ const FolioHero = () => {
         className="absolute z-[4] pointer-events-none"
         style={{ 
           width: 'clamp(400px, 60vw, 1000px)',
-          bottom: '0',
-          left: 'clamp(-200px, -28vw, -500px)',
+          bottom: '-5%', // Positioned at the bottom
+          left: 'clamp(-200px, -25vw, -500px)',
           mixBlendMode: 'screen'
         }}
       >
