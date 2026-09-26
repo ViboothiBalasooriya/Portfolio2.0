@@ -325,7 +325,15 @@ const FolioHero = () => {
           mixBlendMode: 'screen'
         }}
       >
-        <img src={groupOverlay} alt="Group overlay" className="w-full h-auto opacity-60" />
+        <img 
+          src={groupOverlay} 
+          alt="Group overlay" 
+          className="w-full h-auto opacity-60" 
+          style={{ 
+            transform: 'scaleX(-1)', 
+            filter: 'grayscale(100%) brightness(300%)' 
+          }} 
+        />
       </motion.div>
 
       {/* Hero Content */}
