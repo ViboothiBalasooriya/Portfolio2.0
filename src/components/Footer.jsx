@@ -110,17 +110,7 @@ const Footer = () => {
       {/* Scanline texture */}
       <ScanlineOverlay />
 
-      {/* ── Top metadata bar ──────────────────────────────── */}
-      <div className="relative z-20 w-full border-b border-[rgba(255,255,255,0.05)] px-8 md:px-16 py-4">
-        <div className="flex justify-between items-center max-w-[1400px] mx-auto">
-          <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">SEC_05 // CONTACT</span>
-          <div className="flex items-center gap-4">
-            <span className="font-hud text-[9px] text-[rgba(255,255,255,0.3)]">COMMS CHANNEL</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse opacity-60" />
-            <span className="font-hud text-[9px] text-white opacity-60">OPEN</span>
-          </div>
-        </div>
-      </div>
+
 
       {/* ── Main content ──────────────────────────────────── */}
       <div className="relative z-20 w-full flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-16 md:py-24">

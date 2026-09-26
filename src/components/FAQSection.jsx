@@ -184,11 +184,7 @@ const FAQSection = () => {
       />
 
 
-      {/* Top section metadata */}
-      <div className="absolute top-6 left-10 right-10 z-20 flex justify-between items-center pointer-events-none">
-        <span className="font-hud text-[9px] text-[rgba(255,255,255,0.2)]">SEC_04 // FAQ</span>
-        <span className="font-hud text-[9px] text-[rgba(255,255,255,0.15)]">FRAME 04 OF 05</span>
-      </div>
+
 
       {/* ── content wrapper ────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6 md:px-12 lg:px-24">
