@@ -183,17 +183,6 @@ const FAQSection = () => {
         }}
       />
 
-      {/* Film-strip perforations */}
-      <div className="absolute top-0 bottom-0 left-0 w-5 flex flex-col justify-between py-4 z-10 pointer-events-none" style={{ borderRight: '1px solid rgba(255,255,255,0.04)' }}>
-        {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className="w-2.5 h-2.5 mx-auto border border-[rgba(255,255,255,0.06)] bg-[#060606] rounded-[1px]" />
-        ))}
-      </div>
-      <div className="absolute top-0 bottom-0 right-0 w-5 flex flex-col justify-between py-4 z-10 pointer-events-none" style={{ borderLeft: '1px solid rgba(255,255,255,0.04)' }}>
-        {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className="w-2.5 h-2.5 mx-auto border border-[rgba(255,255,255,0.06)] bg-[#060606] rounded-[1px]" />
-        ))}
-      </div>
 
       {/* Top section metadata */}
       <div className="absolute top-6 left-10 right-10 z-20 flex justify-between items-center pointer-events-none">

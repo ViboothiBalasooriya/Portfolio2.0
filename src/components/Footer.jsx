@@ -106,9 +106,6 @@ const Footer = () => {
       <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-white rounded-full blur-[200px] opacity-[0.015] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-white rounded-full blur-[180px] opacity-[0.02] pointer-events-none" />
 
-      {/* Film-strip perforations on edges */}
-      <FilmPerf side="left" />
-      <FilmPerf side="right" />
 
       {/* Scanline texture */}
       <ScanlineOverlay />
