@@ -315,7 +315,7 @@ const FolioHero = () => {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 1, ease: 'easeOut' }}
-        className="absolute z-30 pointer-events-none"
+        className="absolute z-[4] pointer-events-none"
         style={{ 
           width: 'clamp(120px, 20vw, 350px)',
           bottom: 'clamp(2rem, 10vh, 4rem)',
