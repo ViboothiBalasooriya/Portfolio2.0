@@ -176,8 +176,10 @@ const FolioHero = () => {
       id="hero"
       style={{
         position: 'relative',
-        width: '100%',
-        minHeight: '100vh',
+        width: 'calc(100% - 2rem)',
+        margin: '1rem auto',
+        borderRadius: '24px',
+        minHeight: 'calc(100vh - 2rem)',
         backgroundColor: '#0a0a0a',
         overflow: 'hidden',
         display: 'flex',
