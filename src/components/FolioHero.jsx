@@ -310,20 +310,20 @@ const FolioHero = () => {
 
 
 
-      {/* Overlay Image (Bottom Left) */}
+      {/* Overlay Image (Left Center) */}
       <motion.div 
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: -30, y: '-50%' }}
+        animate={{ opacity: 1, x: 0, y: '-50%' }}
         transition={{ duration: 1.2, delay: 1, ease: 'easeOut' }}
         className="absolute z-[4] pointer-events-none"
         style={{ 
-          width: 'clamp(300px, 45vw, 800px)',
-          bottom: 'clamp(2rem, 5vh, 4rem)',
-          left: 'clamp(-150px, -22vw, -400px)',
+          width: 'clamp(400px, 60vw, 1000px)',
+          top: '50%',
+          left: 'clamp(-200px, -25vw, -500px)',
           mixBlendMode: 'screen'
         }}
       >
-        <img src={groupOverlay} alt="Group overlay" className="w-full h-auto" />
+        <img src={groupOverlay} alt="Group overlay" className="w-full h-auto opacity-60" />
       </motion.div>
 
       {/* Hero Content */}
