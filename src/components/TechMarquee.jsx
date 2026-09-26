@@ -18,7 +18,7 @@ const TechMarquee = () => {
       style={{
         position: 'relative',
         zIndex: 10,
-        backgroundColor: '#0a0a0a',
+        backgroundColor: '#ffffff', // Inverted from #0a0a0a
         padding: '24px 0',
         overflow: 'hidden',
       }}
@@ -41,7 +41,7 @@ const TechMarquee = () => {
                 fontFamily: 'var(--font-inter)',
                 fontSize: '13px',
                 fontWeight: 600,
-                color: 'rgba(255,255,255,0.4)',
+                color: 'rgba(0,0,0,0.5)', // Inverted from rgba(255,255,255,0.4)
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 whiteSpace: 'nowrap',
@@ -56,7 +56,7 @@ const TechMarquee = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '12px',
-                  color: '#ffffff',
+                  color: '#000000', // Inverted from #ffffff
                   whiteSpace: 'nowrap',
                 }}
               >
