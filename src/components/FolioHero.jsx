@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import heroVideo from '../assets/Man_blinking_slowly_1080p_20260914170541_1080p_20260914172941.mp4';
+import groupOverlay from '../assets/Groupxxx 1.png';
 import AboutMe from './AboutMe';
 
 const navLinks = [
@@ -308,6 +309,17 @@ const FolioHero = () => {
 
 
 
+
+      {/* Overlay Image (Bottom Left) */}
+      <motion.div 
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.2, delay: 1, ease: 'easeOut' }}
+        className="absolute bottom-8 left-8 md:bottom-16 md:left-16 z-30 pointer-events-none"
+        style={{ width: 'clamp(120px, 20vw, 350px)' }}
+      >
+        <img src={groupOverlay} alt="Group overlay" className="w-full h-auto" />
+      </motion.div>
 
       {/* Hero Content */}
       <div
