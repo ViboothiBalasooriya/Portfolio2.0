@@ -1,8 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const words = [
   "I'M", "PUSHING", "PIXELS,", "OPTIMIZING", "LOGIC,", "AND", "TURNING", "MY", "VISION", 
@@ -11,37 +8,28 @@ const words = [
 ];
 
 const BioTextSection = () => {
-  const sectionRef = useRef(null);
-  const textRef = useRef(null);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      }
+    }
+  };
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      const elements = textRef.current.querySelectorAll('.bio-word');
-      
-      gsap.set(elements, { opacity: 0, y: 30 });
-
-      gsap.to(elements, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "center center",
-          end: "+=150%", // Pin and scroll for this amount
-          pin: true,
-          scrub: 1, // Smooth scrubbing
-        }
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const wordVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 15, stiffness: 100 } }
+  };
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-screen flex items-center justify-center bg-transparent overflow-hidden" style={{ padding: '8vw 0' }}>
-      <div
-        ref={textRef}
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-transparent overflow-hidden" style={{ padding: '8vw 0' }}>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-100px' }}
         style={{
           maxWidth: '1200px',
           width: '100%',
@@ -54,9 +42,9 @@ const BioTextSection = () => {
         }}
       >
         {words.map((word, i) => (
-          <span
+          <motion.span
             key={i}
-            className="bio-word"
+            variants={wordVariants}
             style={{
               display: 'inline-block',
               backgroundColor: '#ffffff',
@@ -71,9 +59,9 @@ const BioTextSection = () => {
             }}
           >
             {word}
-          </span>
+          </motion.span>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

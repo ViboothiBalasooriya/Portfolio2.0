@@ -32,8 +32,9 @@ function App() {
           
           let isHero = panel.querySelector('#hero') !== null;
           let isProjects = panel.classList.contains('projects-section');
+          let isBioText = panel.classList.contains('bio-text-section');
           
-          if (!isHero && !isProjects) return;
+          if (!isHero && !isProjects && !isBioText) return;
           
           let windowHeight = window.innerHeight;
           let endScroll = `+=${windowHeight}`;
