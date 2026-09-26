@@ -315,8 +315,12 @@ const FolioHero = () => {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 1, ease: 'easeOut' }}
-        className="absolute bottom-8 left-8 md:bottom-16 md:left-16 z-30 pointer-events-none"
-        style={{ width: 'clamp(120px, 20vw, 350px)' }}
+        className="absolute z-30 pointer-events-none"
+        style={{ 
+          width: 'clamp(120px, 20vw, 350px)',
+          bottom: 'clamp(2rem, 10vh, 4rem)',
+          left: 'calc(var(--side-padding) + 5%)'
+        }}
       >
         <img src={groupOverlay} alt="Group overlay" className="w-full h-auto" />
       </motion.div>
