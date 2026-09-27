@@ -340,7 +340,7 @@ const FolioHero = () => {
             textAlign: 'right', // Aligned text right
             maxWidth: '800px',
             marginTop: 'clamp(50vh, 66vh, 66vh)', // Adjusted for responsiveness
-            paddingRight: '5%', // Padding on the right instead of left
+            paddingRight: '0', // Removed 5% padding to push it to the edge
           }}
         >
           {/* Main Name - Typewriter Effect */}
