@@ -5,17 +5,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './index.css';
 import LoadingScreen from './components/LoadingScreen';
 import FolioHero from './components/FolioHero';
+import FolioHeroMobile from './components/FolioHeroMobile';
 import LatestProjects from './components/LatestProjects';
 import CaseStudies from './components/CaseStudies';
 import FAQSection from './components/FAQSection';
 import BioTextSection from './components/BioTextSection';
 import Footer from './components/Footer';
+import useIsMobile from './hooks/useIsMobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const mainRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (isLoading) return;
@@ -56,7 +59,7 @@ function App() {
           if (isHero) {
             let zoomO = panel.querySelector('.zoom-o');
             
-            let elementsToFade = Array.from(panel.querySelectorAll('h1 span, p, nav, .gradient-overlay'))
+            let elementsToFade = Array.from(panel.querySelectorAll('h1 span, p, nav, .gradient-overlay, .scroll-indicator'))
               .filter(el => !el.classList.contains('zoom-o'));
               
             tl.fromTo(elementsToFade, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2 }, 0);
@@ -89,7 +92,7 @@ function App() {
                 scale: 1,
                 duration: 0.8,
                 ease: "power2.out"
-              }, 1.0); // Delayed to start AFTER the '0' zoom finishes (was 0.3)
+              }, 1.0); 
               
               if (vibeLeft && vibeRight) {
                 tl.fromTo([vibeLeft, vibeRight], { opacity: 0, y: 40 }, {
@@ -124,7 +127,7 @@ function App() {
             opacity: 1,
             scrollTrigger: {
               trigger: heroPanel,
-              start: "70% top", // Delay appearance on mobile until '0' is mostly zoomed out
+              start: "70% top",
               end: "+=100%",
               scrub: true
             }
@@ -164,7 +167,7 @@ function App() {
 
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
         <main ref={mainRef}>
-          <section className="section"><div className="section-inner"><FolioHero /></div></section>
+          <section className="section"><div className="section-inner">{isMobile ? <FolioHeroMobile /> : <FolioHero />}</div></section>
           <section className="section projects-section"><div className="section-inner"><LatestProjects /></div></section>
           <section className="section"><div className="section-inner"><CaseStudies /></div></section>
           <section className="section bio-text-section" style={{ position: 'relative', zIndex: 1 }}><div className="section-inner"><BioTextSection /></div></section>
